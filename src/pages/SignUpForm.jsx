@@ -1,4 +1,5 @@
 import { Box, Button, Container, Typography, TextField, Grid, Link } from "@mui/material"
+import { Link as RouterLink } from 'react-router-dom'
 
 const SignUpForm = () => {
   return (
@@ -72,7 +73,7 @@ const SignUpForm = () => {
 
           <Grid container justifyContent="flex-end">
             <Grid item>
-              <Link href="#" variant="body2">
+              <Link component={RouterLink} to="/login" variant="body2">
                 Already have an account? Sign in
               </Link>
             </Grid>
