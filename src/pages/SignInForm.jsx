@@ -22,6 +22,7 @@ const SignInForm = () => {
             fullWidth
             id="email"
             name="email"
+            type="email"
             label="Email Address"
             autoFocus
           />
