@@ -1,10 +1,10 @@
-import SignUpForm from "./components/SignUpForm"
+import { Container } from "@mui/material"
 
 const App = () => {
   return (
-    <>
-      <SignUpForm />
-    </>
+    <Container sx={{ textAlign: 'center', height: '100%' }}>
+      <h1>Hello World</h1>
+    </Container>
   )
 }
 
