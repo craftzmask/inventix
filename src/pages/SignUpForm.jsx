@@ -5,6 +5,11 @@ const SignUpForm = () => {
     <Container component="main" maxWidth="xs">
       <Box
         sx={{
+          boxShadow: 3,
+          borderRadius: 2,
+          px: 4,
+          py: 6,
+          width: '100%',
           marginTop: 15,
           display: 'flex',
           flexDirection: 'column',
