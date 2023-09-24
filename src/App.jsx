@@ -1,13 +1,14 @@
-import { Container, GlobalStyles } from "@mui/material"
+import { Container } from "@mui/material"
 
 import NavBar from "./components/NavBar"
+import Main from "./components/Main"
 
 const App = () => {
   return (
-    <Container sx={{ textAlign: 'center', height: '100%' }}>
-      <GlobalStyles styles={{ ul: { margin: 0, padding: 0, listStyle: 'none' } }} />
+    <>
       <NavBar />
-    </Container>
+      <Main />
+    </>
   )
 }
 
