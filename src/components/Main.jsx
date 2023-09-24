@@ -3,6 +3,8 @@ import { Link as RouterLink } from 'react-router-dom'
 import PaymentsOutlinedIcon from '@mui/icons-material/PaymentsOutlined'
 import ManageAccountsOutlinedIcon from '@mui/icons-material/ManageAccountsOutlined'
 import PieChartOutlineOutlinedIcon from '@mui/icons-material/PieChartOutlineOutlined'
+import dashboardImage from '../images/dashboard.png'
+import heroImage from '../images/hero-image.png'
 
 const features = [
   {
@@ -48,7 +50,7 @@ const Main = () => {
         </Box>
         <Box
           component="img"
-          src="https://erpnext.com/files/erpnext-hero-compressed.png"
+          src={heroImage}
           sx={{ width: [0, 0, '45%', '45%', '45%'], objectFit: 'cover' }}
         >
         </Box>
@@ -63,7 +65,7 @@ const Main = () => {
 
           <Box
             component="img"
-            src="./src/images/dashboard.png"
+            src={dashboardImage}
             sx={{ mt: 7, objectFit: 'contain', maxWidth: '100%' }}
           >
           </Box>
