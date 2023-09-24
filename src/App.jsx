@@ -1,13 +1,6 @@
-import { Container } from "@mui/material"
-
-import NavBar from "./components/NavBar"
-import Main from "./components/Main"
-
 const App = () => {
   return (
     <>
-      <NavBar />
-      <Main />
     </>
   )
 }

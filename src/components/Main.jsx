@@ -1,4 +1,5 @@
 import { Box, Button, Card, CardActions, CardContent, Container, Grid, Typography } from "@mui/material"
+import { Link as RouterLink } from 'react-router-dom'
 import PaymentsOutlinedIcon from '@mui/icons-material/PaymentsOutlined'
 import ManageAccountsOutlinedIcon from '@mui/icons-material/ManageAccountsOutlined'
 import PieChartOutlineOutlinedIcon from '@mui/icons-material/PieChartOutlineOutlined'
@@ -29,7 +30,8 @@ const Main = () => {
           display: 'flex',
           alignItems: 'center',
           width: '100%',
-          py: 15
+          pt: 10,
+          pb: 15
         }}
       >
         <Box>
@@ -40,7 +42,7 @@ const Main = () => {
             Inventix is the only platform you will ever need to help run your business
           </Typography>
           <Box sx={{ mt: 2 }}>
-            <Button variant="contained" sx={{ mr: 2, py: 1, px: 4 }}>Start Now</Button>
+            <Button component={RouterLink} to="/login" variant="contained" sx={{ mr: 2, py: 1, px: 4 }}>Start Now</Button>
             <Button variant="outlined" sx={{ py: 1, px: 4 }}>Contact Us</Button>
           </Box>
         </Box>
@@ -52,9 +54,9 @@ const Main = () => {
         </Box>
       </Container>
 
-      <Box sx={{ py: 15, bgcolor: '#f9fafa' }}>
+      <Box sx={{ py: 10, bgcolor: '#f9fafa' }}>
         <Container>
-          <Typography variant="h3" sx={{ fontWeight: 500 }}>Complete, versatile and powerful</Typography>
+          <Typography variant="h4" sx={{ fontWeight: 500 }}>Complete, versatile and powerful</Typography>
           <Typography sx={{ mt: 1, color: "#74808B", fontWeight: 'light' }} variant="h6">
             Designed for both, simplicity and power
           </Typography>
@@ -68,8 +70,8 @@ const Main = () => {
         </Container>
       </Box>
 
-      <Container sx={{ py: 15, width: '100%' }}>
-        <Typography variant="h3" sx={{ fontWeight: 500 }}>
+      <Container sx={{ py: 10, width: '100%' }}>
+        <Typography variant="h4" sx={{ fontWeight: 500 }}>
           Almost everything you need
         </Typography>
         <Typography sx={{ mt: 1, color: "#74808B", fontWeight: 'light' }} variant="h6">

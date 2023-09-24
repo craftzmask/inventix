@@ -1,5 +1,5 @@
 import ReactDOM from 'react-dom/client'
-import App from './App'
+
 import {
   createBrowserRouter,
   RouterProvider
@@ -8,11 +8,12 @@ import {
 import SignInForm from './pages/SignInForm'
 import SignUpForm from './pages/SignUpForm'
 import ErrorPage from './pages/ErrorPage'
+import HomePage from './pages/HomePage'
 
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <App />,
+    element: <HomePage />,
     errorElement: <ErrorPage />
   },
   {

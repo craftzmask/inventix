@@ -47,7 +47,7 @@ const NavBar = () => {
                 ":hover": { textDecoration: 'underline' }
               }}
             >
-              Support
+              Contact
             </Link>
             <Link
               component={RouterLink}
