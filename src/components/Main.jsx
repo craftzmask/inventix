@@ -47,7 +47,7 @@ const Main = () => {
         <Box
           component="img"
           src="https://erpnext.com/files/erpnext-hero-compressed.png"
-          sx={{ maxWidth: '45%', objectFit: 'cover' }}
+          sx={{ width: [0, 0, '45%', '45%', '45%'], objectFit: 'cover' }}
         >
         </Box>
       </Container>
@@ -78,7 +78,7 @@ const Main = () => {
         
         <Grid container spacing={6} sx={{ mt: 3 }}>
           {features.map(feature => (
-            <Grid key={feature.title} item xs={4}>
+            <Grid key={feature.title} item xs={12} md={4}>
 
               <Card sx={{ border: "none", boxShadow: "none", height: '100%' }}>
                 <Box sx={{ color: '#4C5A67'}}>{feature.icon}</Box>

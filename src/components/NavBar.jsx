@@ -30,7 +30,8 @@ const NavBar = () => {
                 my: 1,
                 mx: 1.5,
                 color: 'black',
-                textDecoration: 'none'
+                textDecoration: 'none',
+                ":hover": { textDecoration: 'underline' }
               }}
             >
               Features
@@ -42,7 +43,8 @@ const NavBar = () => {
                 my: 1,
                 mx: 1.5,
                 color: 'black',
-                textDecoration: 'none'
+                textDecoration: 'none',
+                ":hover": { textDecoration: 'underline' }
               }}
             >
               Support
@@ -54,7 +56,8 @@ const NavBar = () => {
                 my: 1,
                 mx: 1.5,
                 color: 'black',
-                textDecoration: 'none'
+                textDecoration: 'none',
+                ":hover": { textDecoration: 'underline' }
               }}
             >
               Pricing
