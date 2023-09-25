@@ -20,15 +20,17 @@ const SignUpForm = () => {
         <Typography component="h1" variant="h5">Sign Up</Typography>
 
         <Box component="form" sx={{ mt: 3 }}>
-          <Grid container>
-            <Grid item xs>
+          <Grid container spacing={2}>
+            <Grid item xs={12} sm={6}>
               <TextField
+                fullWidth
                 required
                 label="First Name"
               />
             </Grid>
-            <Grid item>
+            <Grid item xs={12} sm={6}>
               <TextField
+                fullWidth
                 required
                 label="Last Name"
               />
