@@ -1,4 +1,5 @@
-import { Box, Button, Card, CardActions, CardContent, Container, Grid, Typography } from "@mui/material"
+import { useInView } from 'react-intersection-observer'
+import { Box, Button, Card, CardActions, CardContent, Container, Fade, Grid, Typography } from "@mui/material"
 import { Link as RouterLink } from 'react-router-dom'
 import PaymentsOutlinedIcon from '@mui/icons-material/PaymentsOutlined'
 import ManageAccountsOutlinedIcon from '@mui/icons-material/ManageAccountsOutlined'
@@ -25,6 +26,10 @@ const features = [
 ]
 
 const Main = () => {
+  const { ref, inView } = useInView({
+    threshold: 0
+  })
+
   return (
     <Box component="main">
       <Container
@@ -67,8 +72,7 @@ const Main = () => {
             component="img"
             src={dashboardImage}
             sx={{ mt: 7, objectFit: 'contain', maxWidth: '100%' }}
-          >
-          </Box>
+          />
         </Container>
       </Box>
 
@@ -80,27 +84,27 @@ const Main = () => {
           No more painful integrations.
         </Typography>
         
-        <Grid container spacing={6} sx={{ mt: 3 }}>
-          {features.map(feature => (
-            <Grid key={feature.title} item xs={12} md={4}>
+          <Grid ref={ref} container spacing={6} sx={{ mt: 1 }}>
+            {features.map((feature, i) => (
+              <Fade in={inView} timeout={{ appear: 0, enter: 1000 + (i * 500), exit: 0 }} key={feature.title}>
+                <Grid item xs={12} md={4}>
+                  <Card sx={{ border: "none", boxShadow: "none", height: '100%' }}>
+                    <Box sx={{ color: '#4C5A67'}}>{feature.icon}</Box>
 
-              <Card sx={{ border: "none", boxShadow: "none", height: '100%' }}>
-                <Box sx={{ color: '#4C5A67'}}>{feature.icon}</Box>
+                    <Typography sx={{ fontWeight: 'bold' }} variant="h6">{feature.title}</Typography>
 
-                <Typography sx={{ fontWeight: 'bold' }} variant="h6">{feature.title}</Typography>
+                    <CardContent sx={{ px: 0 }}>
+                      <Typography sx={{ color: '#4c5a67' }}>{feature.content}</Typography>
+                    </CardContent>
 
-                <CardContent sx={{ px: 0 }}>
-                  <Typography sx={{ color: '#4c5a67' }}>{feature.content}</Typography>
-                </CardContent>
-
-                <CardActions sx={{ px: 0 }}>
-                  <Button sx={{ px: 0 }}>Learn More</Button>
-                </CardActions>
-              </Card>
-
-            </Grid>
-          ))}
-        </Grid>
+                    <CardActions sx={{ px: 0 }}>
+                      <Button sx={{ px: 0 }}>Learn More</Button>
+                    </CardActions>
+                  </Card>
+                </Grid>
+              </Fade>
+            ))}
+          </Grid>
       </Container>
     </Box>
   )
