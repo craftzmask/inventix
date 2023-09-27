@@ -8,7 +8,7 @@ import {
 import SignInForm from './pages/SignInForm'
 import SignUpForm from './pages/SignUpForm'
 import ErrorPage from './pages/ErrorPage'
-import HomePage from './pages/HomePage'
+import HomePage from './pages/Home'
 import { CssBaseline } from '@mui/material'
 
 const router = createBrowserRouter([
