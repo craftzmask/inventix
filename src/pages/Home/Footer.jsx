@@ -22,11 +22,11 @@ const serviceLinks = [
   },
   {
     title: 'sign in',
-    to: 'login'
+    to: '/login'
   },
   {
     title: 'sign up',
-    to: 'signup'
+    to: '/signup'
   }
 ]
 

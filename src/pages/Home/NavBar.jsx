@@ -45,7 +45,7 @@ const NavBar = () => {
             ))}
 
             <Button
-              component={RouterLink} to='login'
+              component={RouterLink} to='/login'
               variant='outlined'
               sx={{ textDecoration: 'none' }}
             >

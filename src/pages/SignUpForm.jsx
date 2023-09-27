@@ -1,81 +1,79 @@
-import { Box, Button, Container, Typography, TextField, Grid, Link } from "@mui/material"
+import { Box, Button, Container, Typography, TextField, Grid, Link } from '@mui/material'
 import { Link as RouterLink } from 'react-router-dom'
 
 const SignUpForm = () => {
   return (
-    <Container component="main" maxWidth="xs">
+    <Container component='main' maxWidth='xs'>
       <Box
-        sx={{
-          boxShadow: 3,
-          borderRadius: 2,
-          px: 4,
-          py: 6,
-          width: '100%',
-          marginTop: 15,
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-        }}
+        display='flex'
+        flexDirection='column'
+        alignItems='center'
+        boxShadow={3}
+        borderRadius={2}
+        mt={15}
+        px={4}
+        py={6}
       >
-        <Typography component="h1" variant="h5">Sign Up</Typography>
+        <Typography component='h1' variant='h5'>Sign Up</Typography>
 
-        <Box component="form" sx={{ mt: 3 }}>
+        <Box component='form' mt={3}>
           <Grid container spacing={2}>
             <Grid item xs={12} sm={6}>
               <TextField
                 fullWidth
                 required
-                label="First Name"
+                label='First Name'
+                autoFocus
               />
             </Grid>
             <Grid item xs={12} sm={6}>
               <TextField
                 fullWidth
                 required
-                label="Last Name"
+                label='Last Name'
               />
             </Grid>
           </Grid>
 
           <TextField
-            margin="normal"
+            margin='normal'
             required
             fullWidth
-            id="email"
-            name="email"
-            type="email"
-            label="Email Address"
+            id='email'
+            name='email'
+            type='email'
+            label='Email Address'
           />
           <TextField
-            margin="normal"
+            margin='normal'
             required
             fullWidth
-            id="password"
-            name="password"
-            type="password"
-            label="Password"
+            id='password'
+            name='password'
+            type='password'
+            label='Password'
           />
           <TextField
-            margin="normal"
+            margin='normal'
             required
             fullWidth
-            id="confirm-password"
-            name="confirm-password"
-            type="password"
-            label="Confirm Password"
+            id='confirm-password'
+            name='confirm-password'
+            type='password'
+            label='Confirm Password'
           />
 
           <Button
             sx={{ mt: 2, mb: 2 }}
             fullWidth
-            variant="contained"
+            variant='contained'
           >
             Sign Up
           </Button>
 
-          <Grid container justifyContent="flex-end">
+          <Grid container justifyContent='flex-end'>
             <Grid item>
-              <Link component={RouterLink} to="/login" variant="body2">
+              <Link component={RouterLink} to='/login' variant='body2'>
                 Already have an account? Sign in
               </Link>
             </Grid>

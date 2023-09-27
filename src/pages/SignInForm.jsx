@@ -1,71 +1,68 @@
-import { Box, Button, Container, Typography, TextField, FormControlLabel, Checkbox, Grid, Link } from "@mui/material"
+import { Box, Button, Container, Typography, TextField, FormControlLabel, Checkbox, Grid, Link } from '@mui/material'
 import { Link as RouterLink } from 'react-router-dom'
 
 const SignInForm = () => {
   return (
-    <Container component="main" maxWidth="xs">
+    <Container component='main' maxWidth='xs'>
       <Box
-        sx={{
-          boxShadow: 3,
-          borderRadius: 2,
-          px: 4,
-          py: 6,
-          width: '100%',
-          marginTop: 15,
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center'
-        }}
+        display='flex'
+        flexDirection='column'
+        alignItems='center'
+        boxShadow={3}
+        borderRadius={2}
+        mt={15}
+        px={4}
+        py={6}
       >
-        <Typography component="h1" variant="h5">
+        <Typography component='h1' variant='h5'>
           Sign In
         </Typography>
 
-        <Box component="form" sx={{ mt: 1 }}>
+        <Box component='form' mt={1}>
           <TextField 
-            margin="normal"
+            margin='normal'
             required
             fullWidth
-            id="email"
-            name="email"
-            type="email"
-            label="Email Address"
+            id='email'
+            name='email'
+            type='email'
+            label='Email Address'
             autoFocus
           />
 
           <TextField
-            margin="normal"
+            margin='normal'
             required
             fullWidth
-            id="password"
-            name="password"
-            type="password"
-            label="Password"
+            id='password'
+            name='password'
+            type='password'
+            label='Password'
           />
 
           <FormControlLabel 
-            control={<Checkbox value="remember" color="primary" />}
-            label="Remember me"
+            control={<Checkbox value='remember' color='primary' />}
+            label='Remember me'
           />
 
           <Button
             sx={{ mt: 2, mb: 2 }}
-            type="submit"
+            type='submit'
             fullWidth
-            variant="contained"
+            variant='contained'
           >
             Sign In
           </Button>
 
           <Grid container>
             <Grid item xs>
-              <Link href="#" variant="body2">
+              <Link href='' variant='body2'>
                 Forgot password?
               </Link>
             </Grid>
 
             <Grid item>
-              <Link component={RouterLink} to="/signup" variant="body2">
+              <Link component={RouterLink} to='/signup' variant='body2'>
                 {"Don't have an account? Sign Up"}
               </Link>
             </Grid>
