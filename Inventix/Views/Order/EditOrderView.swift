@@ -1,0 +1,75 @@
+//
+//  EditOrderView.swift
+//  Inventix
+//
+//  Created by Khanh Chung on 4/3/24.
+//
+
+import SwiftUI
+
+struct EditOrderView: View {
+    @Environment(InventoryViewModel.self) private var store
+    @Environment(\.dismiss) private var dismiss
+    @Binding var order: Order
+    
+    var body: some View {
+        let product = store.getProductBySKU(order.sku)!
+        
+        Form {
+            Section("Name") {
+                Text(product.name)
+            }
+            
+            Section {
+                DatePicker(
+                    "Start Date",
+                    selection: $order.date,
+                    displayedComponents: [.date]
+                )
+            } header: {
+                HStack {
+                    Spacer()
+                    Text("Required")
+                }
+            }
+            
+            Section {
+                TextField("Units", value: $order.stock, format: .number)
+                    .keyboardType(.numberPad)
+            } header: {
+                HStack {
+                    Text("Quantity")
+                    Spacer()
+                    Text("Required")
+                }
+            }
+            
+            Section(header: Text("Notes")) {
+                TextEditor(text: $order.notes)
+                    .frame(height: 150)
+            }
+        }
+        .toolbar {
+            ToolbarItem(placement: .topBarLeading) {
+                Button("Cancel", role: .cancel) {
+                    dismiss()
+                }
+                .foregroundStyle(.red)
+            }
+            
+            ToolbarItem(placement: .topBarTrailing) {
+                Button("Save") {
+                    store.updateOrder(order)
+                    dismiss()
+                }
+            }
+        }
+    }
+}
+
+#Preview {
+    NavigationStack {
+        EditOrderView(order: .constant(Order.example[0]))
+            .environment(InventoryViewModel())
+    }
+}

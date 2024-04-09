@@ -9,9 +9,12 @@ import SwiftUI
 
 @main
 struct InventixApp: App {
+    @State private var productStore = InventoryViewModel()
+    
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            HomeView()
+                .environment(productStore)
         }
     }
 }
