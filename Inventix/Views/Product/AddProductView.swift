@@ -20,7 +20,8 @@ struct AddProductView: View {
     @State private var minStock = 0
     @State private var showAddCategory = false
     @State private var data: Data?
-    @State var selectedItems: [PhotosPickerItem] = []
+    @State private var selectedItems: [PhotosPickerItem] = []
+    @State private var url: URL?
     
     var body: some View {
         @Bindable var store = store
@@ -146,8 +147,15 @@ struct AddProductView: View {
             
             ToolbarItem(placement: .topBarTrailing) {
                 Button("Save") {
-                    if let selectedCategory {
-                        store.addProduct(Product(name: name, description: description, categoryId: selectedCategory.id, price: Decimal(price), sku: sku, minStock: minStock, imageUrl: ""))
+                    if let selectedCategory, let data = data {
+                        if let uiimage = UIImage(data: data) {
+                            saveImage(uiimage)
+                        }
+                        
+                        if let url {
+                            store.addProduct(Product(name: name, description: description, categoryId: selectedCategory.id, price: Decimal(price), sku: sku, minStock: minStock, imageUrl: url.absoluteString))
+                        }
+                        
                         dismiss()
                     }
                 }
@@ -161,6 +169,42 @@ struct AddProductView: View {
             }
         }
     }
+    
+    func saveImage(_ image: UIImage) {
+        guard let data = image.jpegData(compressionQuality: 0.8) else {
+            print("Failed to convert UIImage to Data")
+            return
+        }
+
+        url = getDocumentsDirectory().appendingPathComponent("\(sku).jpg")
+        guard let url = url else { return }
+        
+        do {
+            try data.write(to: url)
+            print("Image saved successfully")
+        } catch {
+            print("Error saving image: \(error.localizedDescription)")
+        }
+    }
+    
+    func getDocumentsDirectory() -> URL {
+        FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+    }
+    /*
+    func loadImage() -> UIImage {
+        do {
+            if let url = url {
+                let data = try Data(contentsOf: url)
+                if let img = UIImage(data: data) {
+                    return img
+                }
+            }
+        } catch {
+            print("error: \(error)") // todo
+        }
+        return UIImage()
+    }
+     */
 }
 
 #Preview {

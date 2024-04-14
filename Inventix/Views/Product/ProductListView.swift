@@ -54,6 +54,7 @@ struct ProductListView: View {
                                                     image
                                                         .resizable()
                                                         .scaledToFit()
+                                                        .frame(width: 150, height: 150)
                                                         .clipShape(RoundedRectangle(cornerRadius: 12))
                                                 } placeholder: {
                                                     ProgressView()
