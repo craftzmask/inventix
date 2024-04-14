@@ -8,13 +8,15 @@
 import SwiftUI
 
 struct AddCategoryView: View {
+    @Environment(InventoryViewModel.self) private var store
     @Environment(\.dismiss) private var dismiss
-    @State private var s = ""
+    @State private var name = ""
+    @State private var description = ""
     
     var body: some View {
         Form {
             Section {
-                TextField("", text: $s)
+                TextField("", text: $name)
             } header: {
                 HStack {
                     Text("Name")
@@ -24,7 +26,7 @@ struct AddCategoryView: View {
             }
             
             Section(header: Text("Description")) {
-                TextEditor(text: $s)
+                TextEditor(text: $description)
                     .frame(height: 150)
             }
         }
@@ -40,6 +42,7 @@ struct AddCategoryView: View {
             
             ToolbarItem(placement: .topBarTrailing) {
                 Button("Save") {
+                    store.addCategory(Category(name: name, description: description))
                     dismiss()
                 }
             }

@@ -13,7 +13,8 @@ struct EditOrderView: View {
     @Binding var order: Order
     
     var body: some View {
-        let product = store.getProductBySKU(order.sku)!
+        let product = store.getProductFromOrder(order)!
+        let maxQuantity = store.getQuantity(productId: product.id)
         
         Form {
             Section("Name") {
@@ -62,6 +63,7 @@ struct EditOrderView: View {
                     store.updateOrder(order)
                     dismiss()
                 }
+                .disabled(order.stock > maxQuantity)
             }
         }
     }

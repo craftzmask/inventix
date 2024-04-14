@@ -8,15 +8,13 @@
 import SwiftUI
 
 struct CategoryListView: View {
-    
     @Environment(InventoryViewModel.self) private var store
-    
     @State private var searchText = ""
-    
     @State private var showAddCategory = false
     
     var body: some View {
-        List(store.categories) { category in
+        let categories = store.filteredOrders(store.categories, searchText: searchText)
+        List(categories) { category in
             NavigationLink {
                 VerticalProductListView(products: store.productsByCategory(category))
                     .navigationTitle("Products")

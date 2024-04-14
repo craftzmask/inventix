@@ -1,21 +1,20 @@
 //
-//  MoveProductView.swift
+//  SaleView.swift
 //  Inventix
 //
-//  Created by Khanh Chung on 4/5/24.
+//  Created by Khanh Chung on 4/12/24.
 //
 
 import SwiftUI
 
-struct MoveProductView: View {
+struct SaleView: View {
     @Environment(InventoryViewModel.self) private var store
     @Environment(\.dismiss) private var dismiss
     @Binding var product: Product
     @State private var quantity = 0
-    @State private var fromWarehouse: Warehouse?
-    @State private var toWarehouse: Warehouse?
-    @State private var notes: String = ""
     @State private var date = Date()
+    @State private var selectedWarehouse: Warehouse?
+    @State private var notes = ""
 
     var body: some View {
         Form {
@@ -32,6 +31,16 @@ struct MoveProductView: View {
                 }
             }
             
+            Section("Warehouses") {
+                Picker("Warehouses", selection: $selectedWarehouse) {
+                    Text("Select").tag(Optional<Warehouse>(nil))
+                    ForEach(store.getWarehouseOnly(productId: product.id)) { warehouse in
+                        Text(warehouse.name).tag(warehouse as Warehouse?)
+                    }
+                }
+                .pickerStyle(.navigationLink)
+            }
+            
             Section {
                 TextField("Units", value: $quantity, format: .number)
                     .keyboardType(.numberPad)
@@ -43,39 +52,12 @@ struct MoveProductView: View {
                 }
             }
             
-            Section {
-                Picker("From", selection: $fromWarehouse) {
-                    Text("Select").tag(Optional<Warehouse>(nil))
-                    ForEach(store.getWarehouseOnly(productId: product.id)) { warehouse in
-                        Text(warehouse.name).tag(warehouse as Warehouse?)
-                    }
-                }
-                .pickerStyle(.navigationLink)
-                
-                Picker("To", selection: $toWarehouse) {
-                    Text("Select From First").tag(Optional<Warehouse>(nil))
-                    ForEach(store.warehouses) { warehouse in
-                        if let fromWarehouse, warehouse.id != fromWarehouse.id {
-                            Text(warehouse.name).tag(warehouse as Warehouse?)
-                        }
-                    }
-                }
-                .pickerStyle(.navigationLink)
-            } header: {
-                HStack {
-                    Text("Warehouse")
-                    Spacer()
-                    Text("Required")
-                }
-            }
-            
-            
             Section(header: Text("Notes")) {
                 TextEditor(text: $notes)
                     .frame(height: 150)
             }
         }
-        .navigationTitle("Move Product")
+        .navigationTitle("Sale")
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             ToolbarItem(placement: .topBarLeading) {
@@ -87,15 +69,12 @@ struct MoveProductView: View {
             
             ToolbarItem(placement: .topBarTrailing) {
                 Button("Save") {
-                    store.moveOrder(product: product, from: fromWarehouse!, to: toWarehouse!, quantity: quantity, date: date, notes: notes)
-                    dismiss()
+                    if let selectedWarehouse {
+                        store.restock(Order(productId: product.id, warehouseId: selectedWarehouse.id, stock: -quantity, action: "Sale", date: date))
+                        dismiss()
+                    }
                 }
-                .disabled(
-                    quantity == 0 ||
-                    fromWarehouse == nil ||
-                    toWarehouse == nil ||
-                    quantity > store.getQuantity(productId: product.id)
-                )
+                .disabled(quantity <= 0 || selectedWarehouse == nil)
             }
         }
     }
@@ -103,7 +82,7 @@ struct MoveProductView: View {
 
 #Preview {
     NavigationStack {
-        MoveProductView(product: .constant(Product.example[0]))
+        SaleView(product: .constant(Product.example[0]))
             .environment(InventoryViewModel())
     }
 }

@@ -9,6 +9,7 @@ import SwiftUI
 
 struct EditProductView: View {
     @Environment(\.dismiss) private var dismiss
+    @Environment(\.presentationMode) private var presentationMode
     @Environment(InventoryViewModel.self) private var store
     @Binding var product: Product
     
@@ -30,30 +31,15 @@ struct EditProductView: View {
             }
 
             Section {
-                Picker("Category", selection: $product.category) {
+                Picker("Category", selection: $product.categoryId) {
                     ForEach(store.categories) { category in
-                        Text(category.name).tag(category)
+                        Text(category.name).tag(category.id)
                     }
                 }
                 .pickerStyle(.navigationLink)
             } header: {
                 HStack {
                     Text("Category")
-                    Spacer()
-                    Text("Required")
-                }
-            }
-            
-            Section {
-                Picker("Warehouse", selection: $product.warehouse) {
-                    ForEach(store.warehouses) { warehouse in
-                        Text(warehouse.name).tag(warehouse)
-                    }
-                }
-                .pickerStyle(.navigationLink)
-            } header: {
-                HStack {
-                    Text("Warehouse")
                     Spacer()
                     Text("Required")
                 }

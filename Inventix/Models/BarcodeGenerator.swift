@@ -17,7 +17,7 @@ struct BarcodeGenerator {
         let generator = CIFilter.code128BarcodeGenerator()
         generator.message = Data(text.utf8)
         
-        let transform = CGAffineTransform(scaleX: 3, y: 3)
+        let transform = CGAffineTransform(scaleX: 5, y: 5)
         if let outputImage = generator.outputImage?.transformed(by: transform),
            let cgImage = context.createCGImage(outputImage, from: outputImage.extent) {
 
@@ -27,6 +27,5 @@ struct BarcodeGenerator {
         }
 
         return Image(systemName: "barcode")
-
     }
 }

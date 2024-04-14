@@ -11,12 +11,13 @@ struct AddWarehouseView: View {
     @Environment(InventoryViewModel.self) private var store
     @Environment(\.dismiss) private var dismiss
     
-    @State private var warehouse = Warehouse.empty
+    @State private var name = ""
+    @State private var address = ""
     
     var body: some View {
         Form {
             Section {
-                TextField("", text: $warehouse.name)
+                TextField("", text: $name)
             } header: {
                 HStack {
                     Text("Name")
@@ -26,7 +27,7 @@ struct AddWarehouseView: View {
             }
             
             Section {
-                TextEditor(text: $warehouse.address)
+                TextEditor(text: $address)
                     .frame(height: 100)
             } header: {
                 HStack {
@@ -48,10 +49,10 @@ struct AddWarehouseView: View {
             
             ToolbarItem(placement: .topBarTrailing) {
                 Button("Save") {
-                    store.addWarehouse(warehouse)
+                    store.addWarehouse(Warehouse(name: name, address: address))
                     dismiss()
                 }
-                .disabled(warehouse.name.isEmpty && warehouse.address.isEmpty)
+                .disabled(name.isEmpty && address.isEmpty)
             }
         }
     }

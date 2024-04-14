@@ -15,8 +15,10 @@ struct BarcodeView: View {
             BarcodeGenerator().generateBarcode(text: text)
                 .resizable()
                 .scaledToFit()
+                .frame(maxWidth: 300, alignment: .center)
             Text(text)
         }
+        .frame(maxWidth: .infinity, alignment: .center)
     }
 }
 

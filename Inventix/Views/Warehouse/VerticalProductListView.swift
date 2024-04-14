@@ -9,12 +9,11 @@ import SwiftUI
 
 struct VerticalProductListView: View {
     @Environment(InventoryViewModel.self) private var store
+    @State private var searchText = ""
     var products: [Product]
     
     var body: some View {
-        @Bindable var store = store
-        
-        List(products) { product in
+        List(store.filteredProducts(products, searchText: searchText)) { product in
             NavigationLink {
                 ProductDetailView(product: product)
                     .environment(store)
@@ -40,6 +39,7 @@ struct VerticalProductListView: View {
                 }
             }
         }
+        .searchable(text: $searchText)
     }
 }
 

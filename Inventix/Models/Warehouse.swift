@@ -11,9 +11,14 @@ import MapKit
 struct Warehouse: Identifiable, Equatable, Hashable {
     var name: String
     var address: String
-    var id: String { self.address }
     var longitude: Double?
     var latitude: Double?
+    let id = UUID()
+    
+    mutating func setLocation(longitude: Double, latitude: Double) {
+        self.longitude = longitude
+        self.latitude = latitude
+    }
     
     static let example: [Warehouse] = [
         .init(name: "Quantum Logistics Hub", address: "1234 Main Street, Dallas, TX 75201"),

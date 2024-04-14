@@ -8,13 +8,15 @@
 import SwiftUI
 
 struct ProductDetailView: View {
+    @Environment(\.dismiss) private var dismiss
     @Environment(InventoryViewModel.self) private var store
     @State var product: Product
     @State private var showProductEditor = false
+    @State private var deleteConfirm = false
     @State private var showRestock = false
     @State private var showMove = false
+    @State private var showSale = false
     
-    // Usage example
     var body: some View {
         Form {
             Section("Product Information") {
@@ -22,18 +24,69 @@ struct ProductDetailView: View {
                 actions
             }
             
+            Button(role: .destructive) {
+                deleteConfirm.toggle()
+            } label: {
+                Label("Delete", systemImage: "trash")
+                    .labelStyle(.titleAndIcon)
+                    .frame(maxWidth: .infinity)
+            }
+            .confirmationDialog("Are you sure to delete?", isPresented: $deleteConfirm) {
+                Button("Delete", role: .destructive) {
+                    store.removeProduct(product)
+                    dismiss()
+                }
+                Button("Cancel", role: .cancel) {
+                    deleteConfirm = false
+                }
+            } message: {
+                Text("Are you sure to delete this product?")
+            }
+            
             Section("Invetory Information") {
                 inventoryInfo
+            }
+            
+            let result = store.getWarehouses(productId: product.id).sorted(by: { $0.key.name < $1.key.name } )
+            if !result.isEmpty {
+                Section("Warehouses") {
+                    List(result, id: \.key) { warehouse, stock in
+                        LabeledContent(warehouse.name) {
+                            Text("\(stock) units")
+                        }
+                    }
+                }
             }
             
             Section("Barcode") {
                 BarcodeView(text: product.sku)
             }
             
-            Section {
-                OrderListView(orders: store.getOrdersByProduct(product))
-            } header: {
-                Text("Order History").font(.title2)
+            let orders = store.orders.filter { $0.productId == product.id }
+            if !orders.isEmpty {
+                Section("History") {
+                    List(orders) { order in
+                        if let product = store.getProductFromOrder(order) {
+                            NavigationLink {
+                                OrderDetailView(order: order)
+                                    .environment(store)
+                                    .navigationTitle("Order Detail")
+                            } label: {
+                                let isAdded = order.stock > 0
+                                HStack(alignment: .bottom) {
+                                    VStack(alignment: .leading) {
+                                        Text(product.sku).fontWeight(.semibold)
+                                        Text("\(isAdded ? "+" : "")\(order.stock) (\(order.action))").font(.subheadline).foregroundStyle(.secondary)
+                                    }
+                                    Spacer()
+                                    Text(order.date, style: .date)
+                                        .foregroundStyle(.secondary)
+                                        .padding(.horizontal)
+                                }
+                            }
+                        }
+                    }
+                }
             }
         }
         .sheet(isPresented: $showProductEditor) {
@@ -51,10 +104,19 @@ struct ProductDetailView: View {
                 MoveProductView(product: $product)
             }
         }
+        .sheet(isPresented: $showSale) {
+            NavigationStack {
+                SaleView(product: $product)
+            }
+        }
         .navigationBarTitleDisplayMode(.inline)
-        .onChange(of: store.products) { _, products in
-            if let updatedProduct = products.first(where: { $0.id == product.id }) {
-                product = updatedProduct
+        .toolbar {
+            ToolbarItem(placement: .topBarTrailing) {
+                Button {
+                    showProductEditor.toggle()
+                } label: {
+                    Label("Edit", systemImage: "square.and.pencil")
+                }
             }
         }
     }
@@ -86,72 +148,59 @@ struct ProductDetailView: View {
     private var actions: some View {
         VStack {
             Button {
-                showProductEditor.toggle()
+                showRestock.toggle()
             } label: {
-                Label("Edit", systemImage: "pencil")
+                Label("Restock", systemImage: "arrow.circlepath")
                     .labelStyle(.titleAndIcon)
-                    .padding(.horizontal)
                     .frame(maxWidth: .infinity)
             }
             .buttonStyle(.borderedProminent)
             
-            Menu {
-                Button {
-                    showRestock.toggle()
-                } label: {
-                    Label("Restock", systemImage: "arrow.circlepath")
-                        .labelStyle(.titleAndIcon)
-                        .padding(.horizontal)
-                        .frame(maxWidth: .infinity)
-                }
-                .buttonStyle(.borderedProminent)
-                
-                Button {
-                    showRestock.toggle()
-                } label: {
-                    Label("Adjust", systemImage: "square.and.pencil")
-                        .labelStyle(.titleAndIcon)
-                        .padding(.horizontal)
-                        .frame(maxWidth: .infinity)
-                }
-                .buttonStyle(.borderedProminent)
-                
+            Button {
+                showSale.toggle()
             } label: {
-                Label("Action", systemImage: "ellipsis.circle")
-                    .frame(width: 10000)
+                Label("Sale", systemImage: "dollarsign")
+                    .labelStyle(.titleAndIcon)
+                    .frame(maxWidth: .infinity)
             }
-            .frame(width: .infinity)
             .buttonStyle(.borderedProminent)
-            .foregroundStyle(.white)
             
             Button {
                 showMove.toggle()
             } label: {
                 Label("Move", systemImage: "shippingbox.and.arrow.backward.fill")
                     .labelStyle(.titleAndIcon)
-                    .padding(.horizontal)
                     .frame(maxWidth: .infinity)
             }
             .buttonStyle(.borderedProminent)
         }
     }
     
+    @ViewBuilder
     private var inventoryInfo: some View {
+        let quantity = store.getQuantity(productId: product.id)
+        let indicatorColor = if quantity <= 0 {
+            Color.red
+        } else if quantity <= product.minStock {
+            Color.orange
+        } else {
+            Color.secondary
+        }
+                                         
         Group {
-            LabeledContent("Warehouse") {
-                Text("\(product.warehouse.name)")
-            }
-            
             LabeledContent("Current Inventory") {
-                Text("\(product.stock) units")
+                Text("\(quantity) units")
+                    .foregroundStyle(indicatorColor)
             }
             
             LabeledContent("Min. Stock Level") {
                 Text("\(product.minStock) units")
             }
             
-            LabeledContent("Category") {
-                Text("\(product.category.name)")
+            if let category = store.getCategory(id: product.categoryId) {
+                LabeledContent("Category") {
+                    Text("\(category.name)")
+                }
             }
             
             LabeledContent("Price") {

@@ -9,13 +9,18 @@ import SwiftUI
 
 struct EditWarehouseView: View {
     @Environment(\.dismiss) private var dismiss
+    var warehouse: Warehouse
+    @State private var name: String
     
-    @State private var s = ""
+    init(warehouse: Warehouse) {
+        self.warehouse = warehouse
+        self.name = self.warehouse.name
+    }
     
     var body: some View {
         Form {
             Section {
-                TextField("", text: $s)
+                TextField("", text: $name)
             } header: {
                 HStack {
                     Text("Name")
@@ -37,12 +42,15 @@ struct EditWarehouseView: View {
             ToolbarItem(placement: .topBarTrailing) {
                 Button("Save") {
                     dismiss()
+                    print(warehouse.name)
+                    print(name)
                 }
+                .disabled(name == warehouse.name)
             }
         }
     }
 }
 
 #Preview {
-    EditWarehouseView()
+    EditWarehouseView(warehouse: Warehouse.example[0])
 }

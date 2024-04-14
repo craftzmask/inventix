@@ -28,7 +28,7 @@ struct HomeView: View {
             }
             .tabItem { Label("Products", systemImage: "book") }
             .tag(Menu.products as Menu?)
-                
+
             NavigationStack {
                 OrderListView(orders: store.orders)
                     .environment(store)
@@ -62,18 +62,20 @@ struct HomeView: View {
     private var ipadNavigationView: some View {
         NavigationSplitView {
             List(Menu.allCases, selection: $selectedMenuItem) { menuItem in
-                Text(menuItem.rawValue.capitalized).tag(menuItem)
+                Label(menuItem.rawValue.capitalized, systemImage: menuItem.icon)
+                    .tag(menuItem)
             }
             .navigationTitle("Inventix")
+
         } detail: {
             switch selectedMenuItem {
             case .products:
                 ProductListView()
                     .environment(store)
+                    .searchable(text: $searchText)
             case .orders:
                 OrderListView(orders: store.orders)
                     .environment(store)
-                    .searchable(text: $searchText)
             case .warehouses:
                 WarehouseListView()
                     .environment(store)
@@ -86,10 +88,25 @@ struct HomeView: View {
                 Text("Select a menu")
             }
         }
+        
     }
     
     enum Menu: String, CaseIterable, Identifiable {
         case products, orders, warehouses, categories, profile
+        var icon: String {
+            switch self {
+            case .products:
+                "book"
+            case .orders:
+                "cube.box"
+            case .warehouses:
+                "mappin.and.ellipse"
+            case .categories:
+                "square.grid.2x2"
+            case .profile:
+                "person.crop.circle"
+            }
+        }
         var id: String { self.rawValue }
     }
 }

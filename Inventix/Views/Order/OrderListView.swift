@@ -13,23 +13,26 @@ struct OrderListView: View {
     var orders: [Order]
     
     var body: some View {
+        let orders = store.filteredOrders(orders, searchText: searchText)
+        
         List(orders) { order in
-            NavigationLink {
-                OrderDetailView(order: order)
-                    .environment(store)
-            } label: {
-                HStack(alignment: .bottom) {
+            if let product = store.getProductFromOrder(order) {
+                NavigationLink {
+                    OrderDetailView(order: order)
+                        .environment(store)
+                } label: {
+                    let isAdded = order.stock > 0
+                    
                     VStack(alignment: .leading) {
-                        Text(order.sku)
-                            .fontWeight(.semibold)
-                        Text("+\(order.stock.description) (\(order.type.rawValue.capitalized))")
-                            .font(.subheadline)
-                            .foregroundStyle(.secondary)
+                        Text(product.name).fontWeight(.semibold)
+                        HStack(alignment: .bottom) {
+                            Text("\(isAdded ? "+" : "")\(order.stock) (\(order.action))").font(.subheadline).foregroundStyle(.secondary)
+                            Spacer()
+                            Text(order.date, style: .date)
+                                .foregroundStyle(.secondary)
+                                .padding(.horizontal)
+                        }
                     }
-                    Spacer()
-                    Text(order.date, style: .date)
-                        .foregroundStyle(.secondary)
-                        .padding(.horizontal)
                 }
             }
         }

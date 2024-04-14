@@ -11,61 +11,73 @@ struct RestockView: View {
     @Environment(InventoryViewModel.self) private var store
     @Environment(\.dismiss) private var dismiss
     @Binding var product: Product
-    @State var order = Order(sku: "", stock: 0, type: .restock, date: Date())
+    @State private var quantity = 0
+    @State private var date = Date()
+    @State private var selectedWarehouse: Warehouse?
+    @State private var notes = ""
 
     var body: some View {
-        Form {
-            Section("Name") {
-                Text(product.name)
-            }
-            
-            Section {
-                DatePicker(
-                    "Start Date",
-                    selection: $order.date,
-                    displayedComponents: [.date]
-                )
-            } header: {
-                HStack {
-                    Spacer()
-                    Text("Required")
+        NavigationStack {
+            Form {
+                Section("Name") {
+                    Text(product.name)
+                }
+                
+                Section {
+                    DatePicker("Start Date", selection: $date, displayedComponents: [.date])
+                } header: {
+                    HStack {
+                        Spacer()
+                        Text("Required")
+                    }
+                }
+                
+                Section("Warehouses") {
+                    Picker("Warehouses", selection: $selectedWarehouse) {
+                        ForEach(store.warehouses) { warehouse in
+                            Text(warehouse.name).tag(warehouse as Warehouse?)
+                        }
+                    }
+                    .pickerStyle(.navigationLink)
+                }
+                
+                Section {
+                    TextField("Units", value: $quantity, format: .number)
+                        .keyboardType(.numberPad)
+                } header: {
+                    HStack {
+                        Text("Quantity")
+                        Spacer()
+                        Text("Required")
+                    }
+                }
+                
+                Section(header: Text("Notes")) {
+                    TextEditor(text: $notes)
+                        .frame(height: 150)
                 }
             }
-            
-            Section {
-                TextField("Units", value: $order.stock, format: .number)
-                    .keyboardType(.numberPad)
-            } header: {
-                HStack {
-                    Text("Quantity")
-                    Spacer()
-                    Text("Required")
+            .navigationTitle("Restock")
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .topBarLeading) {
+                    Button("Cancel", role: .cancel) {
+                        dismiss()
+                    }
+                    .foregroundStyle(.red)
                 }
-            }
-            
-            Section(header: Text("Notes")) {
-                TextEditor(text: $order.notes)
-                    .frame(height: 150)
-            }
-        }
-        .navigationTitle("Restock")
-        .navigationBarTitleDisplayMode(.inline)
-        .toolbar {
-            ToolbarItem(placement: .topBarLeading) {
-                Button("Cancel", role: .cancel) {
-                    dismiss()
+                
+                ToolbarItem(placement: .topBarTrailing) {
+                    Button("Save") {
+                        if let selectedWarehouse {
+                            store.restock(
+                                Order(productId: product.id, warehouseId: selectedWarehouse.id, stock: quantity, action: "Restock", date: date)
+                            )
+                            dismiss()
+                        }
+                    }
+                    .disabled(quantity <= 0 || selectedWarehouse == nil)
                 }
-                .foregroundStyle(.red)
-            }
-            
-            ToolbarItem(placement: .topBarTrailing) {
-                Button("Save") {
-                    order.sku = product.sku
-                    store.restock(order)
-                    product.stock += order.stock
-                    dismiss()
-                }
-                .disabled(order.stock <= 0)
             }
         }
     }
