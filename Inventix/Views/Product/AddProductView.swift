@@ -16,7 +16,7 @@ struct AddProductView: View {
     @State private var description = ""
     @State private var selectedCategory: Category?
     @State private var price = 0
-    @State private var sku = ""
+    @State var sku = ""
     @State private var minStock = 0
     @State private var showAddCategory = false
     @State private var data: Data?

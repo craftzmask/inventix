@@ -6,12 +6,17 @@
 //
 
 import SwiftUI
+import CodeScanner
 
 struct HomeView: View {
     @State private var store = InventoryViewModel()
     @State private var selectedMenuItem: Menu? = Menu.products
     @State private var searchText = ""
-
+    @State private var isPresentingScanner = false
+    @State private var scannedCode: String?
+    @State private var showAddProduct = false
+    @State private var showRestock = false
+    
     var body: some View {
         if UIDevice.current.userInterfaceIdiom == .phone {
             iphoneNavigationView
@@ -37,6 +42,21 @@ struct HomeView: View {
             .tag(Menu.orders as Menu?)
             
             NavigationStack {
+                /*
+                CodeScannerView(codeTypes: [.qr], shouldVibrateOnSuccess: false) { response in
+                    if case let .success(result) = response {
+                        scannedCode = result.string
+                        isPresentingScanner = false
+                    }
+                }
+                 */
+                ScannerView()
+                    .environment(store)
+            }
+            .tabItem { Label("Scan", systemImage: "qrcode.viewfinder") }
+            .tag(Menu.scanner as Menu?)
+            
+            NavigationStack {
                 WarehouseListView()
                     .environment(store)
             }
@@ -50,11 +70,13 @@ struct HomeView: View {
             .tabItem { Label("Categories", systemImage: "square.grid.2x2") }
             .tag(Menu.categories as Menu?)
             
+            /*
             NavigationStack {
                 ProfileView()
             }
             .tabItem { Label("Profile", systemImage: "person.crop.circle") }
             .tag(Menu.profile as Menu?)
+             */
         }
     }
     
@@ -92,13 +114,15 @@ struct HomeView: View {
     }
     
     enum Menu: String, CaseIterable, Identifiable {
-        case products, orders, warehouses, categories, profile
+        case products, orders, scanner, warehouses, categories, profile
         var icon: String {
             switch self {
             case .products:
                 "book"
             case .orders:
                 "cube.box"
+            case .scanner:
+                "qrcode.viewfinder"
             case .warehouses:
                 "mappin.and.ellipse"
             case .categories:
@@ -109,6 +133,10 @@ struct HomeView: View {
         }
         var id: String { self.rawValue }
     }
+}
+
+extension String: Identifiable {
+    public var id: String { self }
 }
 
 #Preview {

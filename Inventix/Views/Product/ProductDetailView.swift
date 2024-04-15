@@ -59,7 +59,7 @@ struct ProductDetailView: View {
             }
             
             Section("Barcode") {
-                BarcodeView(text: product.sku)
+                QRCodeView(text: product.sku)
             }
             
             let orders = store.orders.filter { $0.productId == product.id }
@@ -96,7 +96,7 @@ struct ProductDetailView: View {
         }
         .sheet(isPresented: $showRestock) {
             NavigationStack {
-                RestockView(product: $product)
+                RestockView(product: product)
             }
         }
         .sheet(isPresented: $showMove) {

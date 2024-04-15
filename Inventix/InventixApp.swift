@@ -13,8 +13,8 @@ struct InventixApp: App {
     
     var body: some Scene {
         WindowGroup {
-            HomeView()
-                .environment(productStore)
+            HomeView().environment(productStore)
+            //TestView().environment(productStore)
         }
     }
 }

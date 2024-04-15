@@ -10,7 +10,7 @@ import SwiftUI
 struct RestockView: View {
     @Environment(InventoryViewModel.self) private var store
     @Environment(\.dismiss) private var dismiss
-    @Binding var product: Product
+    @State var product: Product
     @State private var quantity = 0
     @State private var date = Date()
     @State private var selectedWarehouse: Warehouse?
@@ -34,6 +34,7 @@ struct RestockView: View {
                 
                 Section("Warehouses") {
                     Picker("Warehouses", selection: $selectedWarehouse) {
+                        Text("Select").tag(Optional<Warehouse>(nil))
                         ForEach(store.warehouses) { warehouse in
                             Text(warehouse.name).tag(warehouse as Warehouse?)
                         }
@@ -85,7 +86,7 @@ struct RestockView: View {
 
 #Preview {
     NavigationStack {
-        RestockView(product: .constant(Product.example[0]))
+        RestockView(product: Product.example[0])
             .environment(InventoryViewModel())
     }
 }

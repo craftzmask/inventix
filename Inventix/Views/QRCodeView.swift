@@ -1,5 +1,5 @@
 //
-//  BarcodeView.swift
+//  QRCodeView.swift
 //  Inventix
 //
 //  Created by Khanh Chung on 4/5/24.
@@ -7,15 +7,15 @@
 
 import SwiftUI
 
-struct BarcodeView: View {
+struct QRCodeView: View {
     var text: String
     
     var body: some View {
         VStack(spacing: 0) {
-            BarcodeGenerator().generateBarcode(text: text)
+            QRCodeGenerator().generateBarcode(text: text)
                 .resizable()
                 .scaledToFit()
-                .frame(maxWidth: 300, alignment: .center)
+                .frame(maxWidth: 160, alignment: .center)
             Text(text)
         }
         .frame(maxWidth: .infinity, alignment: .center)
@@ -23,5 +23,5 @@ struct BarcodeView: View {
 }
 
 #Preview {
-    BarcodeView(text: "ABC-123")
+    QRCodeView(text: "ABC-123")
 }

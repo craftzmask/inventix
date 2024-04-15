@@ -34,7 +34,7 @@ struct OrderDetailView: View {
                 }
                 
                 Section("Barcode") {
-                    BarcodeView(text: product.sku)
+                    QRCodeView(text: product.sku)
                 }
                 
                 actions

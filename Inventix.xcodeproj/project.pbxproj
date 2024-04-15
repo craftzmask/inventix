@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		B4070C902BC9C4E700370E79 /* SaleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4070C8F2BC9C4E700370E79 /* SaleView.swift */; };
 		B4070C962BCC66FF00370E79 /* ImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4070C952BCC66FF00370E79 /* ImageView.swift */; };
+		B4070C992BCC862000370E79 /* CodeScanner in Frameworks */ = {isa = PBXBuildFile; productRef = B4070C982BCC862000370E79 /* CodeScanner */; };
+		B4070C9B2BCC866000370E79 /* ScannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4070C9A2BCC866000370E79 /* ScannerView.swift */; };
 		B4644EF32BB7DBAC00AE39D5 /* AddWarehouseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4644EF22BB7DBAC00AE39D5 /* AddWarehouseView.swift */; };
 		B4644EF52BB7DC7900AE39D5 /* EditWarehouseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4644EF42BB7DC7900AE39D5 /* EditWarehouseView.swift */; };
 		B4644EF72BB7DD3E00AE39D5 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4644EF62BB7DD3E00AE39D5 /* HomeView.swift */; };
@@ -22,8 +24,8 @@
 		B4644F0E2BBE082600AE39D5 /* EditOrderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4644F0D2BBE082600AE39D5 /* EditOrderView.swift */; };
 		B4644F102BC0AD1800AE39D5 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4644F0F2BC0AD1800AE39D5 /* ProfileView.swift */; };
 		B4644F132BC1050B00AE39D5 /* MoveProductView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4644F122BC1050B00AE39D5 /* MoveProductView.swift */; };
-		B4644F152BC109C300AE39D5 /* BarcodeGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4644F142BC109C300AE39D5 /* BarcodeGenerator.swift */; };
-		B4644F172BC11E1000AE39D5 /* BarcodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4644F162BC11E1000AE39D5 /* BarcodeView.swift */; };
+		B4644F152BC109C300AE39D5 /* QRCodeGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4644F142BC109C300AE39D5 /* QRCodeGenerator.swift */; };
+		B4644F172BC11E1000AE39D5 /* QRCodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4644F162BC11E1000AE39D5 /* QRCodeView.swift */; };
 		B4644F192BC2645C00AE39D5 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4644F182BC2645C00AE39D5 /* User.swift */; };
 		B47802EE2BB67B3F001D9676 /* InventixApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B47802ED2BB67B3F001D9676 /* InventixApp.swift */; };
 		B47802F22BB67B40001D9676 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B47802F12BB67B40001D9676 /* Assets.xcassets */; };
@@ -42,6 +44,7 @@
 /* Begin PBXFileReference section */
 		B4070C8F2BC9C4E700370E79 /* SaleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaleView.swift; sourceTree = "<group>"; };
 		B4070C952BCC66FF00370E79 /* ImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageView.swift; sourceTree = "<group>"; };
+		B4070C9A2BCC866000370E79 /* ScannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScannerView.swift; sourceTree = "<group>"; };
 		B4644EF22BB7DBAC00AE39D5 /* AddWarehouseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddWarehouseView.swift; sourceTree = "<group>"; };
 		B4644EF42BB7DC7900AE39D5 /* EditWarehouseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditWarehouseView.swift; sourceTree = "<group>"; };
 		B4644EF62BB7DD3E00AE39D5 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
@@ -55,8 +58,8 @@
 		B4644F0D2BBE082600AE39D5 /* EditOrderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditOrderView.swift; sourceTree = "<group>"; };
 		B4644F0F2BC0AD1800AE39D5 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		B4644F122BC1050B00AE39D5 /* MoveProductView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoveProductView.swift; sourceTree = "<group>"; };
-		B4644F142BC109C300AE39D5 /* BarcodeGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarcodeGenerator.swift; sourceTree = "<group>"; };
-		B4644F162BC11E1000AE39D5 /* BarcodeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarcodeView.swift; sourceTree = "<group>"; };
+		B4644F142BC109C300AE39D5 /* QRCodeGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRCodeGenerator.swift; sourceTree = "<group>"; };
+		B4644F162BC11E1000AE39D5 /* QRCodeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRCodeView.swift; sourceTree = "<group>"; };
 		B4644F182BC2645C00AE39D5 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		B47802EA2BB67B3F001D9676 /* Inventix.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Inventix.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B47802ED2BB67B3F001D9676 /* InventixApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InventixApp.swift; sourceTree = "<group>"; };
@@ -78,6 +81,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B4070C992BCC862000370E79 /* CodeScanner in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -87,9 +91,10 @@
 		B4644EFE2BBBE15800AE39D5 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				B4070C9A2BCC866000370E79 /* ScannerView.swift */,
 				B4644EF62BB7DD3E00AE39D5 /* HomeView.swift */,
 				B4644F0F2BC0AD1800AE39D5 /* ProfileView.swift */,
-				B4644F162BC11E1000AE39D5 /* BarcodeView.swift */,
+				B4644F162BC11E1000AE39D5 /* QRCodeView.swift */,
 				B4644F032BBBE1D900AE39D5 /* Order */,
 				B4644F022BBBE1B400AE39D5 /* Warehouse */,
 				B4644F002BBBE17F00AE39D5 /* Category */,
@@ -126,7 +131,7 @@
 				B47802FD2BB67B89001D9676 /* Product.swift */,
 				B47803032BB7845B001D9676 /* Category.swift */,
 				B4644F092BBDD9CA00AE39D5 /* Order.swift */,
-				B4644F142BC109C300AE39D5 /* BarcodeGenerator.swift */,
+				B4644F142BC109C300AE39D5 /* QRCodeGenerator.swift */,
 				B4644F182BC2645C00AE39D5 /* User.swift */,
 			);
 			path = Models;
@@ -217,6 +222,9 @@
 			dependencies = (
 			);
 			name = Inventix;
+			packageProductDependencies = (
+				B4070C982BCC862000370E79 /* CodeScanner */,
+			);
 			productName = Inventix;
 			productReference = B47802EA2BB67B3F001D9676 /* Inventix.app */;
 			productType = "com.apple.product-type.application";
@@ -245,6 +253,9 @@
 				Base,
 			);
 			mainGroup = B47802E12BB67B3F001D9676;
+			packageReferences = (
+				B4070C972BCC862000370E79 /* XCRemoteSwiftPackageReference "CodeScanner" */,
+			);
 			productRefGroup = B47802EB2BB67B3F001D9676 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -277,9 +288,9 @@
 				B4644F062BBBEA9C00AE39D5 /* VerticalProductListView.swift in Sources */,
 				B47803122BB7D18E001D9676 /* Warehouse.swift in Sources */,
 				B4644F192BC2645C00AE39D5 /* User.swift in Sources */,
-				B4644F172BC11E1000AE39D5 /* BarcodeView.swift in Sources */,
+				B4644F172BC11E1000AE39D5 /* QRCodeView.swift in Sources */,
 				B4644F0C2BBDFEAD00AE39D5 /* OrderDetailView.swift in Sources */,
-				B4644F152BC109C300AE39D5 /* BarcodeGenerator.swift in Sources */,
+				B4644F152BC109C300AE39D5 /* QRCodeGenerator.swift in Sources */,
 				B4644EFB2BB8E33200AE39D5 /* ProductDetailView.swift in Sources */,
 				B47802FE2BB67B89001D9676 /* Product.swift in Sources */,
 				B4644EF52BB7DC7900AE39D5 /* EditWarehouseView.swift in Sources */,
@@ -291,6 +302,7 @@
 				B47803082BB7C0DA001D9676 /* AddProductView.swift in Sources */,
 				B4644EFD2BBBDD8700AE39D5 /* EditProductView.swift in Sources */,
 				B4070C902BC9C4E700370E79 /* SaleView.swift in Sources */,
+				B4070C9B2BCC866000370E79 /* ScannerView.swift in Sources */,
 				B4644F0E2BBE082600AE39D5 /* EditOrderView.swift in Sources */,
 				B47802EE2BB67B3F001D9676 /* InventixApp.swift in Sources */,
 				B4644F102BC0AD1800AE39D5 /* ProfileView.swift in Sources */,
@@ -435,6 +447,7 @@
 				DEVELOPMENT_TEAM = ZTL7H4UB85;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSCameraUsageDescription = "Allow users to scan barcodes";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -468,6 +481,7 @@
 				DEVELOPMENT_TEAM = ZTL7H4UB85;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSCameraUsageDescription = "Allow users to scan barcodes";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -512,6 +526,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		B4070C972BCC862000370E79 /* XCRemoteSwiftPackageReference "CodeScanner" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/twostraws/CodeScanner";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.4.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		B4070C982BCC862000370E79 /* CodeScanner */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B4070C972BCC862000370E79 /* XCRemoteSwiftPackageReference "CodeScanner" */;
+			productName = CodeScanner;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = B47802E22BB67B3F001D9676 /* Project object */;
 }
