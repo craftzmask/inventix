@@ -6,6 +6,8 @@
 //
 
 import Foundation
+import UserNotifications
+import SwiftUI
 
 @Observable
 class InventoryViewModel {
@@ -13,6 +15,57 @@ class InventoryViewModel {
     private(set) var categories: [Category] = Category.example
     private(set) var warehouses: [Warehouse] = Warehouse.example
     private(set) var orders: [Order] = Order.example
+    
+    var isScheduled = UserDefaults.standard.bool(forKey: "isScheduled")
+    var timeScheduled = Date(timeIntervalSince1970: UserDefaults.standard.double(forKey: "timeScheduled"))
+    
+    func sendNotification(title: String, subtitle: String) {
+        let content = UNMutableNotificationContent()
+        content.title = title
+        content.subtitle = subtitle
+        content.sound = UNNotificationSound.default
+
+        // show this notification five seconds from now
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
+
+        // choose a random identifier
+        let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
+        
+        // add our notification request
+        UNUserNotificationCenter.current().add(request) { error in
+            if let error = error {
+                print("Error sending notification: \(error)")
+            } else {
+                print("Notification sent successfully")
+            }
+        }
+    }
+    
+    func scheduleNotification(title: String, subtitle: String) {
+        let content = UNMutableNotificationContent()
+        content.title = title
+        content.subtitle = subtitle
+        content.sound = UNNotificationSound.default
+        
+        var dateComponents = DateComponents()
+        dateComponents.hour = Calendar.current.component(.hour, from: timeScheduled)
+        dateComponents.minute = Calendar.current.component(.minute, from: timeScheduled)
+        
+        // show this notification five seconds from now
+        let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: true)
+        
+        // choose a random identifier
+        let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
+        
+        // add our notification request
+        UNUserNotificationCenter.current().add(request) { error in
+            if let error = error {
+                print("Error sending notification: \(error)")
+            } else {
+                print("Notification sent successfully")
+            }
+        }
+    }
     
     func getProduct(id: UUID) -> Product? {
         products.first { $0.id == id }
@@ -31,7 +84,6 @@ class InventoryViewModel {
     }
     
     func removeProduct(_ product: Product) {
-        orders.removeAll { $0.productId == product.id }
         products.removeAll { $0.id == product.id }
     }
     
@@ -47,7 +99,7 @@ class InventoryViewModel {
                 result.append(product)
             }
         }
-                              
+        
         return result
     }
     
@@ -63,6 +115,7 @@ class InventoryViewModel {
                 quantity += order.stock
             }
         }
+        
         return quantity
     }
     
@@ -94,6 +147,10 @@ class InventoryViewModel {
     }
     
     func restock(_ order: Order) {
+        orders.append(order)
+    }
+    
+    func addProduct(_ order: Order) {
         orders.append(order)
     }
     

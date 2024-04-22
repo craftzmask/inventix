@@ -20,7 +20,7 @@ struct OrderDetailView: View {
         NavigationStack {
             Form {                
                 Section {
-                    productInfo.listRowSeparator(.visible)
+                    productInfo
                 }
                             
                 Section("Inventory Information") {
@@ -36,8 +36,6 @@ struct OrderDetailView: View {
                 Section("Barcode") {
                     QRCodeView(text: product.sku)
                 }
-                
-                actions
             }
             .navigationBarTitleDisplayMode(.inline)
             .sheet(isPresented: $showEditOrder) {
@@ -79,30 +77,9 @@ struct OrderDetailView: View {
                 Text(product.name)
                     .font(.title2)
                     .fontWeight(.semibold)
-                Text(product.sku)
+                Text(store.getCategory(id: product.categoryId)?.name ?? "Unknown")
                     .font(.subheadline)
                     .foregroundStyle(.secondary)
-            }
-        }
-    }
-    
-    @ViewBuilder
-    private var actions: some View {
-        VStack {
-            Button(role: .destructive) {
-                deleteConfirm = true
-            } label: {
-                Label("Delete", systemImage: "trash")
-                    .labelStyle(.titleAndIcon)
-                    .frame(maxWidth: .infinity)
-            }
-            .confirmationDialog("Are you sure to delete?", isPresented: $deleteConfirm) {
-                Button("Delete", role: .destructive) {
-                    store.removeOrder(order)
-                    dismiss()
-                }
-            } message: {
-                Text("Are you sure to delete this product?")
             }
         }
     }

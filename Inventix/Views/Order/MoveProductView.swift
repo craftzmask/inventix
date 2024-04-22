@@ -53,7 +53,7 @@ struct MoveProductView: View {
                 .pickerStyle(.navigationLink)
                 
                 Picker("To", selection: $toWarehouse) {
-                    Text("Select From First").tag(Optional<Warehouse>(nil))
+                    Text("Select").tag(Optional<Warehouse>(nil))
                     ForEach(store.warehouses) { warehouse in
                         if let fromWarehouse, warehouse.id != fromWarehouse.id {
                             Text(warehouse.name).tag(warehouse as Warehouse?)

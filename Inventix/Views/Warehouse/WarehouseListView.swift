@@ -41,7 +41,7 @@ struct WarehouseListView: View {
                     if !products.isEmpty {
                         List(store.filteredProducts(products, searchText: searchTextProduct)) { product in
                             NavigationLink {
-                                ProductDetailView(product: product)
+                                ProductDetailView(product: product, isWarehouseView: true)
                                     .environment(store)
                             } label: {
                                 HStack(alignment: .top) {

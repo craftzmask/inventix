@@ -7,21 +7,40 @@
 
 import SwiftUI
 import CodeScanner
+import UserNotifications
 
 struct HomeView: View {
     @State private var store = InventoryViewModel()
     @State private var selectedMenuItem: Menu? = Menu.products
-    @State private var searchText = ""
     @State private var isPresentingScanner = false
     @State private var scannedCode: String?
     @State private var showAddProduct = false
     @State private var showRestock = false
     
     var body: some View {
-        if UIDevice.current.userInterfaceIdiom == .phone {
-            iphoneNavigationView
-        } else if UIDevice.current.userInterfaceIdiom == .pad {
-            ipadNavigationView
+        Group {
+            if UIDevice.current.userInterfaceIdiom == .phone {
+                iphoneNavigationView
+            } else if UIDevice.current.userInterfaceIdiom == .pad {
+                ipadNavigationView
+            }
+        }
+        .onAppear {
+            // 1 checking for permission
+            UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { success, error in
+                if success {
+                    print("Permission approved!")
+                    scheduleNotification()
+                } else if let error = error {
+                    print(error.localizedDescription)
+                }
+            }
+        }
+        .onChange(of: store.timeScheduled) {
+            scheduleNotification()
+        }
+        .onChange(of: store.isScheduled) {
+            scheduleNotification()
         }
     }
     
@@ -42,14 +61,6 @@ struct HomeView: View {
             .tag(Menu.orders as Menu?)
             
             NavigationStack {
-                /*
-                CodeScannerView(codeTypes: [.qr], shouldVibrateOnSuccess: false) { response in
-                    if case let .success(result) = response {
-                        scannedCode = result.string
-                        isPresentingScanner = false
-                    }
-                }
-                 */
                 ScannerView()
                     .environment(store)
             }
@@ -63,20 +74,23 @@ struct HomeView: View {
             .tabItem { Label("Warehouses", systemImage: "mappin.and.ellipse") }
             .tag(Menu.warehouses as Menu?)
             
+            /*
             NavigationStack {
                 CategoryListView()
                     .environment(store)
+                
             }
             .tabItem { Label("Categories", systemImage: "square.grid.2x2") }
             .tag(Menu.categories as Menu?)
+             */
             
-            /*
             NavigationStack {
                 ProfileView()
+                    .environment(store)
+                
             }
-            .tabItem { Label("Profile", systemImage: "person.crop.circle") }
+            .tabItem { Label("Profile", systemImage: "person.circle") }
             .tag(Menu.profile as Menu?)
-             */
         }
     }
     
@@ -88,15 +102,17 @@ struct HomeView: View {
                     .tag(menuItem)
             }
             .navigationTitle("Inventix")
-
+            
         } detail: {
             switch selectedMenuItem {
             case .products:
                 ProductListView()
                     .environment(store)
-                    .searchable(text: $searchText)
             case .orders:
                 OrderListView(orders: store.orders)
+                    .environment(store)
+            case .scanner:
+                ScannerView()
                     .environment(store)
             case .warehouses:
                 WarehouseListView()
@@ -111,6 +127,15 @@ struct HomeView: View {
             }
         }
         
+    }
+    
+    func scheduleNotification() {
+        if store.isScheduled {
+            let expiredProducts = store.products.filter({ $0.daysBeforeExpired() < 2 })
+            if !expiredProducts.isEmpty {
+                store.scheduleNotification(title: "Expired Soon!", subtitle: "Please checkout your products")
+            }
+        }
     }
     
     enum Menu: String, CaseIterable, Identifiable {

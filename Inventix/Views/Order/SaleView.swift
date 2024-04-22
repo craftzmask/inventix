@@ -71,6 +71,13 @@ struct SaleView: View {
                 Button("Save") {
                     if let selectedWarehouse {
                         store.restock(Order(productId: product.id, warehouseId: selectedWarehouse.id, stock: -quantity, action: "Sale", date: date))
+                        
+                        let quantity = store.getQuantity(productId: product.id)
+                        if quantity == 0 {
+                            store.sendNotification(title: "Out of Stock", subtitle: "\(product.name) is out of stock. Restock soon")
+                        } else if quantity <= product.minStock {
+                            store.sendNotification(title: "Low Stock", subtitle: "\(product.name) is about out of stock. Restock soon")
+                        }
                         dismiss()
                     }
                 }

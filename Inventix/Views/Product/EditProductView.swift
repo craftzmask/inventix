@@ -71,7 +71,7 @@ struct EditProductView: View {
                     .keyboardType(.numberPad)
             } header: {
                 HStack {
-                    Text("Min. Stock level")
+                    Text("Min. Stock Level")
                     Spacer()
                     Text("Required")
                 }

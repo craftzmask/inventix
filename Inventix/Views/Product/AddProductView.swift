@@ -18,6 +18,7 @@ struct AddProductView: View {
     @State private var price = 0
     @State var sku = ""
     @State private var minStock = 0
+    @State private var expired = Date()
     @State private var showAddCategory = false
     @State private var data: Data?
     @State private var selectedItems: [PhotosPickerItem] = []
@@ -85,11 +86,13 @@ struct AddProductView: View {
                     .keyboardType(.numberPad)
             } header: {
                 HStack {
-                    Text("Min. Stock level")
+                    Text("Min. Stock Level")
                     Spacer()
                     Text("Required")
                 }
             }
+            
+            DatePicker("Expired", selection: $expired, displayedComponents: .date)
             
             Section {
                 PhotosPicker(
@@ -190,21 +193,6 @@ struct AddProductView: View {
     func getDocumentsDirectory() -> URL {
         FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
     }
-    /*
-    func loadImage() -> UIImage {
-        do {
-            if let url = url {
-                let data = try Data(contentsOf: url)
-                if let img = UIImage(data: data) {
-                    return img
-                }
-            }
-        } catch {
-            print("error: \(error)") // todo
-        }
-        return UIImage()
-    }
-     */
 }
 
 #Preview {

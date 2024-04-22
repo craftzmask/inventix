@@ -30,7 +30,7 @@ struct AddCategoryView: View {
                     .frame(height: 150)
             }
         }
-        .navigationTitle("New Category")
+        .navigationTitle("Add Category")
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             ToolbarItem(placement: .topBarLeading) {
@@ -53,5 +53,6 @@ struct AddCategoryView: View {
 #Preview {
     NavigationStack {
         AddCategoryView()
+            .environment(InventoryViewModel())
     }
 }

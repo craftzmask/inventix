@@ -38,8 +38,8 @@ struct ProductListView: View {
                                 .buttonStyle(.plain)
                             }
                         }
-                        .searchable(text: $searchText)
                         .fontWeight(.semibold)
+                        .searchable(text: $searchText)
                         
                         NavigationStack {
                             ScrollView(.horizontal) {
@@ -63,9 +63,12 @@ struct ProductListView: View {
                                                 
                                                 Text(product.name)
                                                     .fontWeight(.semibold)
-                                                Text("\(store.getQuantity(productId: product.id)) units")
-                                                    .foregroundStyle(.secondary)
-                                                    .font(.subheadline)
+                                                HStack(spacing: 6) {
+                                                    Text("\(store.getQuantity(productId: product.id))")
+                                                    Text("units")
+                                                }
+                                                .foregroundStyle(.secondary)
+                                                .font(.subheadline)
                                             }
                                             .frame(width: 160, height: 200)
                                         }

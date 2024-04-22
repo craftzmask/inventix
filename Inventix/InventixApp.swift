@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import UserNotifications
 
 @main
 struct InventixApp: App {
@@ -14,7 +15,6 @@ struct InventixApp: App {
     var body: some Scene {
         WindowGroup {
             HomeView().environment(productStore)
-            //TestView().environment(productStore)
         }
     }
 }

@@ -16,31 +16,12 @@ struct ProductDetailView: View {
     @State private var showRestock = false
     @State private var showMove = false
     @State private var showSale = false
+    var isWarehouseView = false
     
     var body: some View {
         Form {
             Section("Product Information") {
                 productInfo.listRowSeparator(.visible)
-                actions
-            }
-            
-            Button(role: .destructive) {
-                deleteConfirm.toggle()
-            } label: {
-                Label("Delete", systemImage: "trash")
-                    .labelStyle(.titleAndIcon)
-                    .frame(maxWidth: .infinity)
-            }
-            .confirmationDialog("Are you sure to delete?", isPresented: $deleteConfirm) {
-                Button("Delete", role: .destructive) {
-                    store.removeProduct(product)
-                    dismiss()
-                }
-                Button("Cancel", role: .cancel) {
-                    deleteConfirm = false
-                }
-            } message: {
-                Text("Are you sure to delete this product?")
             }
             
             Section("Invetory Information") {
@@ -52,7 +33,8 @@ struct ProductDetailView: View {
                 Section("Warehouses") {
                     List(result, id: \.key) { warehouse, stock in
                         LabeledContent(warehouse.name) {
-                            Text("\(stock) units")
+                            Text("\(stock)")
+                            Text("units")
                         }
                     }
                 }
@@ -70,7 +52,7 @@ struct ProductDetailView: View {
                             NavigationLink {
                                 OrderDetailView(order: order)
                                     .environment(store)
-                                    .navigationTitle("Order Detail")
+                                    .navigationTitle("Order Details")
                             } label: {
                                 let isAdded = order.stock > 0
                                 HStack(alignment: .bottom) {
@@ -112,12 +94,16 @@ struct ProductDetailView: View {
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             ToolbarItem(placement: .topBarTrailing) {
-                Button {
-                    showProductEditor.toggle()
+                Menu {
+                    actions
                 } label: {
-                    Label("Edit", systemImage: "square.and.pencil")
+                    Label("Actions", systemImage: "ellipsis.circle")
                 }
             }
+            
+        }
+        .onChange(of: product) {
+            print("yes")
         }
     }
     
@@ -148,31 +134,49 @@ struct ProductDetailView: View {
     private var actions: some View {
         VStack {
             Button {
+                showProductEditor.toggle()
+            } label: {
+                Label("Edit", systemImage: "square.and.pencil")
+            }
+            
+            Button {
                 showRestock.toggle()
             } label: {
                 Label("Restock", systemImage: "arrow.circlepath")
-                    .labelStyle(.titleAndIcon)
-                    .frame(maxWidth: .infinity)
             }
-            .buttonStyle(.borderedProminent)
             
             Button {
                 showSale.toggle()
             } label: {
                 Label("Sale", systemImage: "dollarsign")
-                    .labelStyle(.titleAndIcon)
-                    .frame(maxWidth: .infinity)
             }
-            .buttonStyle(.borderedProminent)
             
             Button {
                 showMove.toggle()
             } label: {
                 Label("Move", systemImage: "shippingbox.and.arrow.backward.fill")
-                    .labelStyle(.titleAndIcon)
-                    .frame(maxWidth: .infinity)
             }
-            .buttonStyle(.borderedProminent)
+            
+            if !isWarehouseView {
+                Button(role: .destructive) {
+                    deleteConfirm.toggle()
+                } label: {
+                    Label("Delete", systemImage: "trash")
+                        .labelStyle(.titleAndIcon)
+                        .frame(maxWidth: .infinity)
+                }
+                .confirmationDialog("Are you sure to delete?", isPresented: $deleteConfirm) {
+                    Button("Delete", role: .destructive) {
+                        store.removeProduct(product)
+                        dismiss()
+                    }
+                    Button("Cancel", role: .cancel) {
+                        deleteConfirm = false
+                    }
+                } message: {
+                    Text("Are you sure to delete this product?")
+                }
+            }
         }
     }
     
@@ -189,12 +193,14 @@ struct ProductDetailView: View {
                                          
         Group {
             LabeledContent("Current Inventory") {
-                Text("\(quantity) units")
+                Text("\(quantity)")
                     .foregroundStyle(indicatorColor)
+                Text("units")
             }
             
             LabeledContent("Min. Stock Level") {
-                Text("\(product.minStock) units")
+                Text("\(product.minStock)")
+                Text("units")
             }
             
             if let category = store.getCategory(id: product.categoryId) {
@@ -205,6 +211,10 @@ struct ProductDetailView: View {
             
             LabeledContent("Price") {
                 Text(product.price, format: .currency(code: "USD"))
+            }
+            
+            LabeledContent("Expired Date") {
+                Text(product.expired, style: .date)
             }
         }
     }

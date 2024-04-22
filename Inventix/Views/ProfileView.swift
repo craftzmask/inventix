@@ -8,7 +8,11 @@
 import SwiftUI
 
 struct ProfileView: View {
+    @Environment(InventoryViewModel.self) private var store
+    
     var body: some View {
+        @Bindable var store = store
+        
         Form {
             Section("User Information") {
                 LabeledContent("Name") {
@@ -21,7 +25,6 @@ struct ProfileView: View {
             }
             
             Section("Business Information") {
-                
                 LabeledContent("Name") {
                     Text("Vegan Geo Donut")
                 }
@@ -30,10 +33,23 @@ struct ProfileView: View {
                     Text("Restaurant")
                 }
             }
+            
+            Section("Settings") {
+                Toggle("Daily Reminder", isOn: $store.isScheduled)
+                
+                if store.isScheduled {
+                    DatePicker("", selection: $store.timeScheduled, displayedComponents: .hourAndMinute)
+                        .datePickerStyle(.wheel)
+                }
+            }
+        }
+        .onChange(of: store.timeScheduled) {
+            UserDefaults.standard.set(store.timeScheduled.timeIntervalSince1970, forKey: "timeScheduled")
         }
     }
 }
 
 #Preview {
     ProfileView()
+        .environment(InventoryViewModel())
 }

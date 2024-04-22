@@ -15,8 +15,13 @@ struct Product: Identifiable, Equatable, Hashable {
     var sku: String
     var minStock: Int
     var imageUrl: String
+    var expired = Date()
     
     let id = UUID()
+    
+    func daysBeforeExpired() -> Int {
+        Calendar.current.dateComponents([.day], from: expired, to: Date.now).day!
+    }
     
     static let example: [Product] = [
         Product(name: "Quantix Capacitor",
