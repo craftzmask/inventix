@@ -49,6 +49,25 @@ struct HomeView: View {
             NavigationStack {
                 ProductListView()
                     .environment(store)
+                    .toolbar {
+                        ToolbarItem(placement: .topBarLeading) {
+                            NavigationLink {
+                                ProfileView()
+                                    .environment(store)
+                                    .navigationTitle("Profile")
+                            } label: {
+                                AsyncImage(url: URL(string: "https://res.cloudinary.com/glide/image/fetch/t_media_lib_thumb/https%3A%2F%2Fstorage.googleapis.com%2Fglide-prod.appspot.com%2Fuploads-v2%2FYGvI36VoQe5mJNelMBS1-template-builder%2Fpub%2F8ijk5Xchy5qkOz4fHEy6.png")) { image in
+                                    image
+                                        .resizable()
+                                        .scaledToFit()
+                                        .frame(width: 40, height: 40)
+                                        .clipShape(Circle())
+                                } placeholder: {
+                                    ProgressView()
+                                }
+                            }
+                        }
+                    }
             }
             .tabItem { Label("Products", systemImage: "book") }
             .tag(Menu.products as Menu?)
@@ -56,6 +75,16 @@ struct HomeView: View {
             NavigationStack {
                 OrderListView(orders: store.orders)
                     .environment(store)
+                    .toolbar {
+                        ToolbarItem(placement: .topBarLeading) {
+                            NavigationLink {
+                                ProfileView()
+                                    .environment(store)
+                            } label: {
+                                Text("Profile")
+                            }
+                        }
+                    }
             }
             .tabItem { Label("Orders", systemImage: "cube.box") }
             .tag(Menu.orders as Menu?)
@@ -70,27 +99,38 @@ struct HomeView: View {
             NavigationStack {
                 WarehouseListView()
                     .environment(store)
+                    .toolbar {
+                        ToolbarItem(placement: .topBarLeading) {
+                            NavigationLink {
+                                ProfileView()
+                                    .environment(store)
+                            } label: {
+                                Text("Profile")
+                            }
+                        }
+                    }
             }
             .tabItem { Label("Warehouses", systemImage: "mappin.and.ellipse") }
             .tag(Menu.warehouses as Menu?)
             
-            /*
             NavigationStack {
                 CategoryListView()
                     .environment(store)
+                    .toolbar {
+                        ToolbarItem(placement: .topBarLeading) {
+                            NavigationLink {
+                                ProfileView()
+                                    .environment(store)
+                            } label: {
+                                Text("Profile")
+                            }
+                        }
+                    }
                 
             }
             .tabItem { Label("Categories", systemImage: "square.grid.2x2") }
             .tag(Menu.categories as Menu?)
-             */
             
-            NavigationStack {
-                ProfileView()
-                    .environment(store)
-                
-            }
-            .tabItem { Label("Profile", systemImage: "person.circle") }
-            .tag(Menu.profile as Menu?)
         }
     }
     
@@ -122,6 +162,7 @@ struct HomeView: View {
                     .environment(store)
             case .profile:
                 ProfileView()
+                    .environment(store)
             default:
                 Text("Select a menu")
             }

@@ -15,32 +15,37 @@ struct ProfileView: View {
         
         Form {
             Section("User Information") {
-                LabeledContent("Name") {
-                    Text("Khanh Chung")
-                }
-                
-                LabeledContent("Email") {
-                    Text("khanh.d.chung@gmail.com")
-                }
-            }
-            
-            Section("Business Information") {
-                LabeledContent("Name") {
-                    Text("Vegan Geo Donut")
-                }
-                
-                LabeledContent("Type") {
-                    Text("Restaurant")
+                HStack(alignment: .top) {
+                    AsyncImage(url: URL(string: "https://res.cloudinary.com/glide/image/fetch/t_media_lib_thumb/https%3A%2F%2Fstorage.googleapis.com%2Fglide-prod.appspot.com%2Fuploads-v2%2FYGvI36VoQe5mJNelMBS1-template-builder%2Fpub%2F8ijk5Xchy5qkOz4fHEy6.png")) { image in
+                        image
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 100, height: 100)
+                            .clipShape(RoundedRectangle(cornerRadius: 12))
+                    } placeholder: {
+                        ProgressView()
+                    }
+                    VStack(alignment: .leading) {
+                        Text("Elise Beverley")
+                            .font(.title2)
+                            .fontWeight(.semibold)
+                        Text(verbatim: "elise@example.com")
+                            .foregroundStyle(.gray)
+                    }
                 }
             }
             
             Section("Settings") {
-                Toggle("Daily Reminder", isOn: $store.isScheduled)
+                Toggle("Daily Expired Reminder", isOn: $store.isScheduled)
                 
                 if store.isScheduled {
                     DatePicker("", selection: $store.timeScheduled, displayedComponents: .hourAndMinute)
                         .datePickerStyle(.wheel)
                 }
+            }
+            
+            Button("Sign out", role: .destructive) {
+                
             }
         }
         .onChange(of: store.timeScheduled) {
