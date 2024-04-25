@@ -56,15 +56,7 @@ struct HomeView: View {
                                     .environment(store)
                                     .navigationTitle("Profile")
                             } label: {
-                                AsyncImage(url: URL(string: "https://res.cloudinary.com/glide/image/fetch/t_media_lib_thumb/https%3A%2F%2Fstorage.googleapis.com%2Fglide-prod.appspot.com%2Fuploads-v2%2FYGvI36VoQe5mJNelMBS1-template-builder%2Fpub%2F8ijk5Xchy5qkOz4fHEy6.png")) { image in
-                                    image
-                                        .resizable()
-                                        .scaledToFit()
-                                        .frame(width: 40, height: 40)
-                                        .clipShape(Circle())
-                                } placeholder: {
-                                    ProgressView()
-                                }
+                                profile
                             }
                         }
                     }
@@ -80,8 +72,9 @@ struct HomeView: View {
                             NavigationLink {
                                 ProfileView()
                                     .environment(store)
+                                    .navigationTitle("Profile")
                             } label: {
-                                Text("Profile")
+                                profile
                             }
                         }
                     }
@@ -104,8 +97,9 @@ struct HomeView: View {
                             NavigationLink {
                                 ProfileView()
                                     .environment(store)
+                                    .navigationTitle("Profile")
                             } label: {
-                                Text("Profile")
+                                profile
                             }
                         }
                     }
@@ -121,16 +115,28 @@ struct HomeView: View {
                             NavigationLink {
                                 ProfileView()
                                     .environment(store)
+                                    .navigationTitle("Profile")
                             } label: {
-                                Text("Profile")
+                                profile
                             }
                         }
                     }
-                
             }
             .tabItem { Label("Categories", systemImage: "square.grid.2x2") }
             .tag(Menu.categories as Menu?)
             
+        }
+    }
+    
+    private var profile: some View {
+        AsyncImage(url: URL(string: "https://res.cloudinary.com/glide/image/fetch/t_media_lib_thumb/https%3A%2F%2Fstorage.googleapis.com%2Fglide-prod.appspot.com%2Fuploads-v2%2FYGvI36VoQe5mJNelMBS1-template-builder%2Fpub%2F8ijk5Xchy5qkOz4fHEy6.png")) { image in
+            image
+                .resizable()
+                .scaledToFit()
+                .frame(width: 40, height: 40)
+                .clipShape(Circle())
+        } placeholder: {
+            ProgressView()
         }
     }
     
