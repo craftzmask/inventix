@@ -33,6 +33,7 @@ struct WarehouseListView: View {
                     height: UIDevice.current.userInterfaceIdiom == .phone ? 300 : 450
                 )
             }
+            .listRowBackground(Color.background)
             
             ForEach(store.filteredWarehouses(store.warehouses, searchText: searchTextWarehouse)) { warehouse in
                 let products = Array(Set(store.productsByWarehouse(warehouse)))
@@ -63,8 +64,12 @@ struct WarehouseListView: View {
                                             .foregroundStyle(.secondary)
                                     }
                                 }
+                                .listRowBackground(Color.background)
                             }
+                            .listRowBackground(Color.background)
                         }
+                        .background(Color.background)
+                        .listStyle(.plain)
                         .navigationTitle(warehouse.name)
                         .searchable(text: $searchTextProduct)
                     } else {
@@ -84,8 +89,8 @@ struct WarehouseListView: View {
                         } label: {
                             Image(systemName: "square.and.pencil")
                                 .imageScale(.large)
+                                .foregroundStyle(Color.accentColor)
                         }
-                        .buttonStyle(.plain)
                     }
                 }
                 .sheet(isPresented: $showEditWarehouse) {
@@ -95,7 +100,9 @@ struct WarehouseListView: View {
                     }
                 }
             }
+            .listRowBackground(Color.background)
         }
+        .background(Color.background)
         .listStyle(.plain)
         .sheet(isPresented: $showAddWarehouse) {
             NavigationStack {

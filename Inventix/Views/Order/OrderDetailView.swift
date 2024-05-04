@@ -55,6 +55,8 @@ struct OrderDetailView: View {
                     }
                 }
             }
+            .scrollContentBackground(.hidden)
+            .background(Color.background)
         }
     }
     

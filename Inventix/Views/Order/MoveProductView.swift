@@ -98,6 +98,8 @@ struct MoveProductView: View {
                 )
             }
         }
+        .scrollContentBackground(.hidden)
+        .background(Color.background)
     }
 }
 

@@ -18,7 +18,7 @@ struct HomeView: View {
     @State private var showRestock = false
     
     var body: some View {
-        Group {
+        ZStack {
             if UIDevice.current.userInterfaceIdiom == .phone {
                 iphoneNavigationView
             } else if UIDevice.current.userInterfaceIdiom == .pad {
@@ -60,6 +60,7 @@ struct HomeView: View {
                             }
                         }
                     }
+                    .background(Color.background)
             }
             .tabItem { Label("Products", systemImage: "book") }
             .tag(Menu.products as Menu?)
@@ -78,6 +79,7 @@ struct HomeView: View {
                             }
                         }
                     }
+                    .background(Color.background)
             }
             .tabItem { Label("Orders", systemImage: "cube.box") }
             .tag(Menu.orders as Menu?)
@@ -85,6 +87,7 @@ struct HomeView: View {
             NavigationStack {
                 ScannerView()
                     .environment(store)
+                    .background(Color.background)
             }
             .tabItem { Label("Scan", systemImage: "qrcode.viewfinder") }
             .tag(Menu.scanner as Menu?)
@@ -103,6 +106,7 @@ struct HomeView: View {
                             }
                         }
                     }
+                    .background(Color.background)
             }
             .tabItem { Label("Warehouses", systemImage: "mappin.and.ellipse") }
             .tag(Menu.warehouses as Menu?)
@@ -121,10 +125,10 @@ struct HomeView: View {
                             }
                         }
                     }
+                    .background(Color.background)
             }
             .tabItem { Label("Categories", systemImage: "square.grid.2x2") }
             .tag(Menu.categories as Menu?)
-            
         }
     }
     
@@ -148,7 +152,7 @@ struct HomeView: View {
                     .tag(menuItem)
             }
             .navigationTitle("Inventix")
-            
+            .background(Color.background)
         } detail: {
             switch selectedMenuItem {
             case .products:
@@ -171,6 +175,7 @@ struct HomeView: View {
                     .environment(store)
             default:
                 Text("Select a menu")
+                    .background(Color.background)
             }
         }
         

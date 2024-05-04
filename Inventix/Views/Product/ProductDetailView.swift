@@ -23,10 +23,12 @@ struct ProductDetailView: View {
             Section("Product Information") {
                 productInfo.listRowSeparator(.visible)
             }
+            .listRowBackground(Color.customSection)
             
             Section("Invetory Information") {
                 inventoryInfo
             }
+            .listRowBackground(Color.customSection)
             
             let result = store.getWarehouses(productId: product.id).sorted(by: { $0.key.name < $1.key.name } )
             if !result.isEmpty {
@@ -38,11 +40,14 @@ struct ProductDetailView: View {
                         }
                     }
                 }
+                .listRowBackground(Color.customSection)
             }
             
             Section("Barcode") {
                 QRCodeView(text: product.sku)
             }
+            .listRowBackground(Color.customSection)
+
             
             let orders = store.orders.filter { $0.productId == product.id }
             if !orders.isEmpty {
@@ -69,6 +74,7 @@ struct ProductDetailView: View {
                         }
                     }
                 }
+                .listRowBackground(Color.customSection)
             }
         }
         .sheet(isPresented: $showProductEditor) {
@@ -105,6 +111,8 @@ struct ProductDetailView: View {
         .onChange(of: product) {
             print("yes")
         }
+        .scrollContentBackground(.hidden)
+        .background(Color.background)
     }
     
     private var productInfo: some View {

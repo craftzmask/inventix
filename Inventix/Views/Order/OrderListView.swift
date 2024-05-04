@@ -29,7 +29,7 @@ struct OrderListView: View {
                     VStack(alignment: .leading) {
                         Text(product.name).fontWeight(.semibold)
                         HStack(alignment: .bottom) {
-                            Text("\(isAdded ? "+" : "")\(order.stock) (\(order.action))").font(.subheadline).foregroundStyle(.secondary)
+                            Text("\(isAdded ? "+" : "")\(order.stock) (\(order.action))").font(.footnote).foregroundStyle(.secondary)
                             Spacer()
                             Text(order.date, style: .date)
                                 .foregroundStyle(.secondary)
@@ -37,8 +37,11 @@ struct OrderListView: View {
                         }
                     }
                 }
+                .listRowBackground(Color.background)
             }
         }
+        .background(Color.background)
+        .listStyle(.plain)
         .navigationTitle("Order History")
         .searchable(text: $searchText)
         .toolbar {

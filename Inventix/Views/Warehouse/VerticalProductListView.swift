@@ -38,7 +38,10 @@ struct VerticalProductListView: View {
                     }
                 }
             }
+            .listRowBackground(Color.background)
         }
+        .listStyle(.plain)
+        .background(Color.background)
         .searchable(text: $searchText)
     }
 }

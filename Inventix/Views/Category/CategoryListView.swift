@@ -19,6 +19,7 @@ struct CategoryListView: View {
                 VerticalProductListView(products: store.productsByCategory(category))
                     .navigationTitle("Products")
                     .environment(store)
+                    .background(Color.background)
             } label: {
                 VStack(alignment: .leading) {
                     Text(category.name)
@@ -28,6 +29,7 @@ struct CategoryListView: View {
                         .foregroundStyle(.secondary)
                 }
             }
+            .listRowBackground(Color.background)
         }
         .sheet(isPresented: $showAddCategory) {
             NavigationStack {
@@ -46,6 +48,8 @@ struct CategoryListView: View {
                 }
             }
         }
+        .listStyle(.plain)
+        .background(Color.background)
     }
 }
 

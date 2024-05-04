@@ -27,10 +27,24 @@
 
     },
     "Actions" : {
-
+      "localizations" : {
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hành Động"
+          }
+        }
+      }
     },
     "Add" : {
-
+      "localizations" : {
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Thêm"
+          }
+        }
+      }
     },
     "Add Category" : {
       "extractionState" : "manual",
@@ -77,16 +91,34 @@
       }
     },
     "Are you sure to delete this product?" : {
-
+      "localizations" : {
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bạn có muốn xoá sản phẩm này không?"
+          }
+        }
+      }
     },
     "Are you sure to delete?" : {
-
+      "localizations" : {
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bạn có muốn xoá không?"
+          }
+        }
+      }
     },
     "Barcode" : {
-
-    },
-    "Business Information" : {
-
+      "localizations" : {
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Barcode"
+          }
+        }
+      }
     },
     "Cancel" : {
       "extractionState" : "manual",
@@ -143,8 +175,15 @@
         }
       }
     },
-    "Daily Reminder" : {
-
+    "Daily Expired Reminder" : {
+      "localizations" : {
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nhắc nhở hết hạn mỗi ngày"
+          }
+        }
+      }
     },
     "Delete" : {
       "extractionState" : "manual",
@@ -169,7 +208,14 @@
       }
     },
     "Edit" : {
-
+      "localizations" : {
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Chỉnh Sửa"
+          }
+        }
+      }
     },
     "Edit Order" : {
       "extractionState" : "manual",
@@ -194,16 +240,44 @@
       }
     },
     "Edit Warehouse" : {
-
+      "localizations" : {
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Chỉnh Nhà Kho"
+          }
+        }
+      }
     },
-    "Email" : {
-
+    "Elise Beverley" : {
+      "localizations" : {
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Elise Beverley"
+          }
+        }
+      }
     },
     "Expired" : {
-
+      "localizations" : {
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hết Hạn"
+          }
+        }
+      }
     },
     "Expired Date" : {
-
+      "localizations" : {
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ngày Hết Hạn"
+          }
+        }
+      }
     },
     "From" : {
       "extractionState" : "manual",
@@ -228,10 +302,24 @@
       }
     },
     "Invalid Code" : {
-
+      "localizations" : {
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mã Không Hợp Lệ"
+          }
+        }
+      }
     },
     "Inventix" : {
-
+      "localizations" : {
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Inventix"
+          }
+        }
+      }
     },
     "Inventory Information" : {
       "extractionState" : "manual",
@@ -245,13 +333,14 @@
       }
     },
     "Invetory Information" : {
-
-    },
-    "Khanh Chung" : {
-
-    },
-    "khanh.d.chung@gmail.com" : {
-
+      "localizations" : {
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Thông tin Kho Hàng"
+          }
+        }
+      }
     },
     "Min. Stock Level" : {
       "extractionState" : "manual",
@@ -298,7 +387,14 @@
       }
     },
     "No Products Available" : {
-
+      "localizations" : {
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Không Có Sản Phẩm"
+          }
+        }
+      }
     },
     "Notes" : {
       "extractionState" : "manual",
@@ -389,7 +485,14 @@
       }
     },
     "Profile" : {
-
+      "localizations" : {
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Thông Tin"
+          }
+        }
+      }
     },
     "Quantity" : {
       "extractionState" : "manual",
@@ -403,7 +506,14 @@
       }
     },
     "Request Permission" : {
-
+      "localizations" : {
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Yêu Cầu Cho Phép"
+          }
+        }
+      }
     },
     "Required" : {
       "extractionState" : "manual",
@@ -415,9 +525,6 @@
           }
         }
       }
-    },
-    "Restaurant" : {
-
     },
     "Restock" : {
       "extractionState" : "manual",
@@ -464,7 +571,14 @@
       }
     },
     "Schedule Notification" : {
-
+      "localizations" : {
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Chỉnh Thông Báo"
+          }
+        }
+      }
     },
     "Search" : {
       "extractionState" : "manual",
@@ -500,7 +614,14 @@
       }
     },
     "Select a menu" : {
-
+      "localizations" : {
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Chọn mục"
+          }
+        }
+      }
     },
     "Select From First" : {
       "extractionState" : "manual",
@@ -514,13 +635,44 @@
       }
     },
     "Settings" : {
-
+      "localizations" : {
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cài Đặt"
+          }
+        }
+      }
+    },
+    "Sign out" : {
+      "localizations" : {
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Thoát"
+          }
+        }
+      }
     },
     "SKU" : {
-
+      "localizations" : {
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "SKU"
+          }
+        }
+      }
     },
     "Sort By" : {
-
+      "localizations" : {
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Phân Loại"
+          }
+        }
+      }
     },
     "Start Date" : {
       "extractionState" : "manual",
@@ -544,6 +696,9 @@
         }
       }
     },
+    "Time" : {
+
+    },
     "To" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -554,9 +709,6 @@
           }
         }
       }
-    },
-    "Type" : {
-
     },
     "units" : {
       "extractionState" : "manual",
@@ -570,13 +722,24 @@
       }
     },
     "Units" : {
-
+      "localizations" : {
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Đơn Vị"
+          }
+        }
+      }
     },
     "User Information" : {
-
-    },
-    "Vegan Geo Donut" : {
-
+      "localizations" : {
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Thông Tin Người Dùng"
+          }
+        }
+      }
     },
     "Warehouse" : {
       "extractionState" : "manual",

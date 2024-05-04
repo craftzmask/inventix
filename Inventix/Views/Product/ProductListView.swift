@@ -35,7 +35,6 @@ struct ProductListView: View {
                                             .imageScale(.small)
                                     }
                                 }
-                                .buttonStyle(.plain)
                             }
                         }
                         .fontWeight(.semibold)
@@ -80,6 +79,9 @@ struct ProductListView: View {
                         }
                     }
                 }
+                //.padding()
+                //.background(RoundedRectangle(cornerRadius: 8).fill(Color.customSection))
+
             }
         }
         .padding()
@@ -99,6 +101,7 @@ struct ProductListView: View {
                 }
             }
         }
+        .background(Color.background)
     }
 }
 

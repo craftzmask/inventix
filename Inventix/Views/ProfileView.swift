@@ -12,7 +12,6 @@ struct ProfileView: View {
     
     var body: some View {
         @Bindable var store = store
-        
         Form {
             Section("User Information") {
                 HStack(alignment: .top) {
@@ -33,24 +32,31 @@ struct ProfileView: View {
                             .foregroundStyle(.gray)
                     }
                 }
+                .listRowBackground(Color.customSection)
+
             }
             
             Section("Settings") {
                 Toggle("Daily Expired Reminder", isOn: $store.isScheduled)
+                    .tint(Color.accentColor)
                 
                 if store.isScheduled {
-                    DatePicker("", selection: $store.timeScheduled, displayedComponents: .hourAndMinute)
-                        .datePickerStyle(.wheel)
+                    DatePicker("Time", selection: $store.timeScheduled, displayedComponents: .hourAndMinute)
                 }
             }
+            .listRowBackground(Color.customSection)
+            
             
             Button("Sign out", role: .destructive) {
                 
             }
+            .listRowBackground(Color.customSection)
         }
         .onChange(of: store.timeScheduled) {
             UserDefaults.standard.set(store.timeScheduled.timeIntervalSince1970, forKey: "timeScheduled")
         }
+        .scrollContentBackground(.hidden)
+        .background(Color.background)
     }
 }
 
