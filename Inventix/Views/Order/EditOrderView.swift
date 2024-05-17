@@ -66,8 +66,6 @@ struct EditOrderView: View {
                 .disabled(order.stock > maxQuantity)
             }
         }
-        .scrollContentBackground(.hidden)
-        .background(Color.background)
     }
 }
 

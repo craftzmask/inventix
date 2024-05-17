@@ -17,6 +17,10 @@ struct HomeView: View {
     @State private var showAddProduct = false
     @State private var showRestock = false
     
+    init() {
+        UITabBar.appearance().backgroundColor = UIColor.tabview
+    }
+    
     var body: some View {
         ZStack {
             if UIDevice.current.userInterfaceIdiom == .phone {

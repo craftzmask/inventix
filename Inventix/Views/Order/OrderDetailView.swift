@@ -22,20 +22,24 @@ struct OrderDetailView: View {
                 Section {
                     productInfo
                 }
+                .listRowBackground(Color.customSection)
                             
                 Section("Inventory Information") {
                     inventoryInfo
                 }
+                .listRowBackground(Color.customSection)
                 
                 if !order.notes.isEmpty {
                     Section("Notes") {
                         Text(order.notes)
                     }
+                    .listRowBackground(Color.customSection)
                 }
                 
                 Section("Barcode") {
                     QRCodeView(text: product.sku)
                 }
+                .listRowBackground(Color.customSection)
             }
             .navigationBarTitleDisplayMode(.inline)
             .sheet(isPresented: $showEditOrder) {

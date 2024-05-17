@@ -80,8 +80,6 @@ struct RestockView: View {
                     .disabled(quantity <= 0 || selectedWarehouse == nil)
                 }
             }
-            .scrollContentBackground(.hidden)
-            .background(Color.background)
         }
     }
 }

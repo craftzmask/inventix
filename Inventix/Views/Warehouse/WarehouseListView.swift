@@ -102,8 +102,6 @@ struct WarehouseListView: View {
             }
             .listRowBackground(Color.background)
         }
-        .background(Color.background)
-        .listStyle(.plain)
         .sheet(isPresented: $showAddWarehouse) {
             NavigationStack {
                 AddWarehouseView()
@@ -128,6 +126,9 @@ struct WarehouseListView: View {
                 }
             }
         }
+        .scrollContentBackground(.hidden)
+        .background(Color.background)
+        .listStyle(.plain)
         .onAppear {
             for warehouse in store.warehouses {
                 let geocoder = CLGeocoder()

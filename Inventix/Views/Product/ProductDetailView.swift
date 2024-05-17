@@ -115,7 +115,10 @@ struct ProductDetailView: View {
         .background(Color.background)
     }
     
+    @ViewBuilder
     private var productInfo: some View {
+        let quantity = store.getQuantity(productId: product.id)
+        
         HStack(alignment: .top) {
             AsyncImage(url: URL(string: product.imageUrl)) { image in
                 image
@@ -134,6 +137,17 @@ struct ProductDetailView: View {
                 Text(product.sku)
                     .font(.headline)
                     .foregroundStyle(.secondary)
+                if quantity <= 0 {
+                    Text("Out of Stock")
+                        .fontWeight(.semibold)
+                        .padding(.vertical, 5)
+                        .foregroundStyle(Color.red)
+                } else if quantity <= product.minStock {
+                    Text("Low Stock")
+                        .fontWeight(.semibold)
+                        .padding(.vertical, 5)
+                        .foregroundStyle(Color.orange)
+                }
             }
         }
     }
@@ -191,18 +205,9 @@ struct ProductDetailView: View {
     @ViewBuilder
     private var inventoryInfo: some View {
         let quantity = store.getQuantity(productId: product.id)
-        let indicatorColor = if quantity <= 0 {
-            Color.red
-        } else if quantity <= product.minStock {
-            Color.orange
-        } else {
-            Color.secondary
-        }
-                                         
         Group {
             LabeledContent("Current Inventory") {
                 Text("\(quantity)")
-                    .foregroundStyle(indicatorColor)
                 Text("units")
             }
             
